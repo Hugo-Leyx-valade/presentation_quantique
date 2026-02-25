@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Intrication : Des Liens Quantiques</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #1a1025;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            width: 1910px;
+            height: 1070px;
+            overflow: hidden;
+        }
+
+        /* Glassmorphism Panels */
+        .glass-panel {
+            background: rgba(45, 27, 78, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+        }
+
+        .highlight-box {
+            background: rgba(255, 0, 85, 0.1);
+            border-left: 4px solid #ff0055;
+        }
+
+        .analogy-box {
+            background: rgba(255, 215, 0, 0.1);
+            border-left: 4px solid #ffd700;
+        }
+
+        /* Typography */
+        h1 {
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        /* Visual Elements */
+        .particle-core {
+            fill: url(#grad1);
+            filter: drop-shadow(0 0 10px rgba(0, 243, 255, 0.6));
+        }
+        
+        .connection-wave {
+            stroke: #ffd700;
+            stroke-width: 2;
+            fill: none;
+            stroke-dasharray: 5;
+            animation: flow 1s linear infinite;
+        }
+
+        @keyframes flow {
+            from { stroke-dashoffset: 10; }
+            to { stroke-dashoffset: 0; }
+        }
+
+        .glow-text {
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+        
+        /* Box/Glove Illustration Styles */
+        .box-face {
+            fill: rgba(255, 255, 255, 0.1);
+            stroke: #a0aec0;
+            stroke-width: 1;
+        }
+    </style>
+</head>
+<body class="flex flex-col relative">
+<!-- Background Decor -->
+<div class="absolute top-0 right-0 w-full h-full overflow-hidden z-0 pointer-events-none">
+<div class="absolute -bottom-20 -left-20 w-96 h-96 bg-[#2d1b4e] rounded-full filter blur-3xl opacity-40"></div>
+<div class="absolute top-0 right-20 w-64 h-64 bg-[#ff0055] rounded-full filter blur-3xl opacity-10"></div>
+<!-- Abstract Particles -->
+<div class="absolute top-1/4 right-1/4 text-[#00f3ff] opacity-20 text-xs"><i class="fas fa-link"></i></div>
+<div class="absolute bottom-1/3 left-10 text-[#ffd700] opacity-20 text-xs"><i class="fas fa-link"></i></div>
+</div>
+<!-- Main Container -->
+<div class="flex-1 flex flex-col p-12 relative z-10">
+<!-- Header -->
+<header class="flex items-center justify-between mb-6">
+<div>
+<div class="flex items-center space-x-3 mb-2">
+<span class="bg-[#2d1b4e] text-[#ff0055] px-3 py-1 rounded text-sm font-bold border border-[#ff0055] shadow-[0_0_10px_rgba(255,0,85,0.2)]">Principe #4</span>
+<span class="text-gray-400 uppercase tracking-widest text-sm">Fondamentaux</span>
+</div>
+<h1 class="text-4xl font-bold text-white tracking-tight">L'Intrication : <span class="text-[#00f3ff]">Connexion Absolue</span></h1>
+</div>
+<div class="w-16 h-16 rounded-full bg-gradient-to-br from-gray-700 to-gray-900 border-2 border-gray-600 flex items-center justify-center overflow-hidden shadow-lg">
+<i class="fas fa-project-diagram text-3xl text-gray-300"></i>
+</div>
+</header>
+<!-- Content Split -->
+<div class="flex-1 flex gap-10">
+<!-- Left Column: Text & Concept -->
+<div class="w-5/12 flex flex-col justify-center space-y-6">
+<!-- Definition -->
+<div class="glass-panel p-6">
+<h3 class="text-[#00f3ff] font-bold text-lg mb-2 flex items-center">
+<i class="fas fa-infinity mr-2"></i> Une seule identité
+                    </h3>
+<p class="text-gray-300 text-sm leading-relaxed mb-2">
+                        Deux particules intriquées forment un <strong>système unique</strong>, quelle que soit la distance qui les sépare (même des années-lumière !).
+                    </p>
+<p class="text-gray-400 text-xs italic">
+                        Einstein appelait cela "une action fantôme à distance".
+                    </p>
+</div>
+<!-- Mechanism -->
+<div class="highlight-box p-6 rounded-r-xl bg-opacity-10 backdrop-filter backdrop-blur-sm">
+<h3 class="text-[#ff0055] font-bold text-lg mb-3 flex items-center">
+<i class="fas fa-bolt mr-2"></i> Effet Instantané
+                    </h3>
+<p class="text-gray-200 text-sm leading-relaxed">
+                        Mesurer l'état d'une particule (ex: spin haut) détermine <strong>instantanément</strong> l'état de l'autre (spin bas). Sans aucun délai.
+                    </p>
+</div>
+<!-- Analogy -->
+<div class="analogy-box p-5 rounded-r-xl bg-opacity-10 backdrop-filter backdrop-blur-sm">
+<h3 class="text-[#ffd700] font-bold text-lg mb-2 flex items-center">
+<i class="fas fa-box-open mr-2"></i> L'Analogie des Gants
+                    </h3>
+<p class="text-gray-200 text-xs leading-relaxed">
+                        Si vous mettez un gant gauche dans une boîte et un droit dans l'autre : ouvrir l'une révèle l'autre immédiatement. <br/>
+<span class="text-gray-400 italic">Différence quantique : les gants n'ont pas de forme définie avant l'ouverture !</span>
+</p>
+</div>
+</div>
+<!-- Right Column: Visual Illustration -->
+<div class="w-7/12 relative glass-panel p-6 flex flex-col items-center justify-center">
+<h3 class="absolute top-6 left-0 right-0 text-center text-gray-400 text-xs font-semibold uppercase tracking-widest">Visualisation du Phénomène</h3>
+<div class="w-full h-full relative flex items-center justify-center">
+<svg class="w-full h-full overflow-visible" viewbox="0 0 600 350">
+<defs>
+<radialgradient cx="50%" cy="50%" fx="50%" fy="50%" id="grad1" r="50%">
+<stop offset="0%" style="stop-color:#ffffff;stop-opacity:1"></stop>
+<stop offset="40%" style="stop-color:#00f3ff;stop-opacity:0.8"></stop>
+<stop offset="100%" style="stop-color:#00f3ff;stop-opacity:0"></stop>
+</radialgradient>
+<radialgradient cx="50%" cy="50%" fx="50%" fy="50%" id="grad2" r="50%">
+<stop offset="0%" style="stop-color:#ffffff;stop-opacity:1"></stop>
+<stop offset="40%" style="stop-color:#ff0055;stop-opacity:0.8"></stop>
+<stop offset="100%" style="stop-color:#ff0055;stop-opacity:0"></stop>
+</radialgradient>
+<filter id="glow">
+<fegaussianblur result="coloredBlur" stddeviation="2.5"></fegaussianblur>
+<femerge>
+<femergenode in="coloredBlur"></femergenode>
+<femergenode in="SourceGraphic"></femergenode>
+</femerge>
+</filter>
+</defs>
+<!-- Connection Wave -->
+<path d="M 150,175 Q 300,100 450,175" fill="none" stroke="rgba(255, 255, 255, 0.2)" stroke-width="2"></path>
+<path d="M 150,175 Q 300,250 450,175" fill="none" stroke="rgba(255, 255, 255, 0.2)" stroke-width="2"></path>
+<!-- Animated pulses representing entanglement -->
+<circle cx="0" cy="0" fill="#ffd700" r="3">
+<animatemotion dur="2s" path="M 150,175 Q 300,100 450,175" repeatcount="indefinite"></animatemotion>
+</circle>
+<circle cx="0" cy="0" fill="#ffd700" r="3">
+<animatemotion dur="2s" path="M 450,175 Q 300,250 150,175" repeatcount="indefinite"></animatemotion>
+</circle>
+<!-- Particle A (Left) -->
+<g transform="translate(150, 175)">
+<circle class="animate-pulse" fill="url(#grad1)" opacity="0.2" r="40"></circle>
+<circle fill="#00f3ff" filter="url(#glow)" r="15"></circle>
+<text fill="#00f3ff" font-size="14" font-weight="bold" text-anchor="middle" x="0" y="70">Particule A</text>
+<text fill="#a0aec0" font-size="10" text-anchor="middle" x="0" y="90">Paris</text>
+<!-- Spin Arrow Up -->
+<path d="M 0,10 L 0,-10 M -5,-5 L 0,-10 L 5,-5" fill="none" stroke="white" stroke-width="3" transform="translate(0,0)"></path>
+</g>
+<!-- Particle B (Right) -->
+<g transform="translate(450, 175)">
+<circle class="animate-pulse" fill="url(#grad2)" opacity="0.2" r="40" style="animation-delay: 0.5s"></circle>
+<circle fill="#ff0055" filter="url(#glow)" r="15"></circle>
+<text fill="#ff0055" font-size="14" font-weight="bold" text-anchor="middle" x="0" y="70">Particule B</text>
+<text fill="#a0aec0" font-size="10" text-anchor="middle" x="0" y="90">Tokyo</text>
+<!-- Spin Arrow Down -->
+<path d="M 0,-10 L 0,10 M -5,5 L 0,10 L 5,5" fill="none" stroke="white" stroke-width="3" transform="translate(0,0)"></path>
+</g>
+<!-- Central text -->
+<text fill="white" font-size="12" opacity="0.7" text-anchor="middle" x="300" y="160">État Intriqué</text>
+<text fill="#ffd700" font-size="16" font-weight="bold" text-anchor="middle" x="300" y="180">Ψ = (|↑↓⟩ - |↓↑⟩)/√2</text>
+</svg>
+</div>
+<!-- Analogy Mini-Visual at bottom -->
+<div class="absolute bottom-6 flex space-x-12 opacity-80">
+<div class="flex flex-col items-center">
+<div class="w-12 h-12 border border-gray-500 rounded flex items-center justify-center bg-[#2d1b4e]">
+<i class="fas fa-mitten text-[#00f3ff]"></i>
+</div>
+<span class="text-[10px] text-gray-400 mt-1">Gant G</span>
+</div>
+<div class="flex items-center text-gray-600">
+<i class="fas fa-exchange-alt"></i>
+</div>
+<div class="flex flex-col items-center">
+<div class="w-12 h-12 border border-gray-500 rounded flex items-center justify-center bg-[#2d1b4e]">
+<i class="fas fa-mitten text-[#ff0055] transform scale-x-[-1]"></i>
+</div>
+<span class="text-[10px] text-gray-400 mt-1">Gant D</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<div class="absolute bottom-6 left-12 right-12 flex justify-between items-center border-t border-gray-800 pt-3 text-xs text-gray-500">
+<div class="flex items-center space-x-2">
+<i class="fas fa-link"></i>
+<p class="m-0">La "spooky action" d'Einstein</p>
+</div>
+<p class="m-0">15 / 34</p>
+</div>
+</div>
+</body>
+</html>

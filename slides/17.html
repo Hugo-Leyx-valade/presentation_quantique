@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>1927 - Principe d'Incertitude d'Heisenberg</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #1a1025;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            width: 1910px;
+            height: 1070px;
+            overflow: hidden;
+        }
+
+        /* Glassmorphism Panels */
+        .glass-panel {
+            background: rgba(45, 27, 78, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+        }
+
+        .highlight-box {
+            background: rgba(255, 0, 85, 0.1);
+            border-left: 4px solid #ff0055;
+        }
+
+        .info-box {
+            background: rgba(0, 243, 255, 0.1);
+            border-left: 4px solid #00f3ff;
+        }
+
+        /* Typography */
+        h1 {
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        /* Visual Elements */
+        .wave-path {
+            fill: none;
+            stroke-width: 3;
+            stroke-linecap: round;
+        }
+
+        .distribution-fill {
+            fill-opacity: 0.3;
+        }
+
+        .glow-cyan {
+            filter: drop-shadow(0 0 5px rgba(0, 243, 255, 0.6));
+        }
+
+        .glow-pink {
+            filter: drop-shadow(0 0 5px rgba(255, 0, 85, 0.6));
+        }
+
+        .math-font {
+            font-family: 'Times New Roman', serif;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body class="flex flex-col relative">
+<!-- Background Decor -->
+<div class="absolute top-0 right-0 w-full h-full overflow-hidden z-0 pointer-events-none">
+<div class="absolute -top-20 -left-20 w-96 h-96 bg-[#2d1b4e] rounded-full filter blur-3xl opacity-40"></div>
+<div class="absolute bottom-0 right-20 w-80 h-80 bg-[#ff0055] rounded-full filter blur-3xl opacity-5"></div>
+<div class="absolute top-1/2 left-1/3 text-[#00f3ff] opacity-10 text-xl"><i class="fas fa-question"></i></div>
+<div class="absolute bottom-1/4 right-1/4 text-[#ff0055] opacity-10 text-xl"><i class="fas fa-wave-square"></i></div>
+</div>
+<!-- Main Container -->
+<div class="flex-1 flex flex-col p-12 relative z-10">
+<!-- Header -->
+<header class="flex items-center justify-between mb-6">
+<div>
+<div class="flex items-center space-x-3 mb-2">
+<span class="bg-[#2d1b4e] text-[#ff0055] px-3 py-1 rounded text-sm font-bold border border-[#ff0055] shadow-[0_0_10px_rgba(255,0,85,0.2)]">1927</span>
+<span class="text-gray-400 uppercase tracking-widest text-sm">Principes Fondamentaux</span>
+</div>
+<h1 class="text-4xl font-bold text-white tracking-tight">Le Principe d'<span class="text-[#00f3ff]">Incertitude</span></h1>
+</div>
+<div class="w-16 h-16 rounded-full bg-gradient-to-br from-gray-700 to-gray-900 border-2 border-gray-600 flex items-center justify-center overflow-hidden shadow-lg">
+<i class="fas fa-user-secret text-3xl text-gray-300"></i>
+</div>
+</header>
+<!-- Content Split -->
+<div class="flex-1 flex gap-10">
+<!-- Left Column: Text & Concept -->
+<div class="w-5/12 flex flex-col justify-center space-y-5">
+<!-- The Core Concept -->
+<div class="glass-panel p-5">
+<h3 class="text-white font-bold text-lg mb-2 flex items-center">
+<i class="fas fa-ban text-[#ff0055] mr-2"></i> Une limite fondamentale
+                    </h3>
+<p class="text-gray-300 text-sm leading-relaxed mb-3">
+                        En physique quantique, il est <strong>impossible</strong> de connaître simultanément et avec précision :
+                    </p>
+<ul class="text-sm text-gray-300 space-y-2 ml-2">
+<li class="flex items-center"><span class="w-2 h-2 bg-[#00f3ff] rounded-full mr-2"></span> La position d'une particule (Où est-elle ?)</li>
+<li class="flex items-center"><span class="w-2 h-2 bg-[#ff0055] rounded-full mr-2"></span> Sa vitesse / impulsion (Où va-t-elle ?)</li>
+</ul>
+</div>
+<!-- The Trade-off -->
+<div class="info-box p-5 rounded-r-xl bg-opacity-10 backdrop-filter backdrop-blur-sm">
+<h3 class="text-[#00f3ff] font-bold text-lg mb-2 flex items-center">
+<i class="fas fa-compress-arrows-alt mr-2"></i> L'effet "Pincement"
+                    </h3>
+<p class="text-gray-200 text-sm leading-relaxed">
+                        Plus on "pince" la position pour la rendre précise, plus la vitesse s'étale et devient incertaine. C'est un compromis inévitable de la nature.
+                    </p>
+</div>
+<!-- The Formula -->
+<div class="bg-[#1a1025] rounded-lg p-3 border border-gray-700 flex items-center justify-center shadow-inner">
+<span class="text-2xl math-font text-white"><span class="text-[#00f3ff]">Δx</span> · <span class="text-[#ff0055]">Δp</span> ≥ <span class="text-gray-400">h</span>/4π</span>
+</div>
+<!-- Analogy -->
+<div class="flex items-start space-x-3 text-sm text-gray-400 italic">
+<i class="fas fa-camera text-gray-500 mt-1"></i>
+<p>Analogie : Comme une photo. Soit le sujet est net mais figé (position connue, mouvement perdu), soit on voit le flou de mouvement (vitesse connue, position floue).</p>
+</div>
+</div>
+<!-- Right Column: Visual Illustration -->
+<div class="w-7/12 relative glass-panel p-6 flex flex-col justify-center">
+<h3 class="absolute top-4 left-0 right-0 text-center text-gray-300 text-xs font-semibold uppercase tracking-widest">Visualisation du compromis</h3>
+<div class="flex-1 w-full h-full flex flex-col justify-center space-y-8">
+<!-- Scenario 1: Position Precise -->
+<div class="relative h-1/2 w-full">
+<div class="absolute top-0 left-0 text-xs font-bold text-[#00f3ff] bg-[#1a1025] px-2 py-1 rounded border border-[#00f3ff]">Cas 1 : Position Précise</div>
+<svg class="w-full h-full overflow-visible" viewbox="0 0 400 120">
+<!-- Axis -->
+<line stroke="#4a5568" stroke-width="1" x1="20" x2="380" y1="100" y2="100"></line>
+<!-- Position (Cyan) - Narrow Spike -->
+<path class="glow-cyan" d="M 180,100 Q 190,100 195,20 L 200,10 L 205,20 Q 210,100 220,100" fill="none" stroke="#00f3ff" stroke-width="2"></path>
+<text fill="#00f3ff" font-size="10" text-anchor="middle" x="200" y="115">Position (Δx petit)</text>
+<!-- Momentum (Pink) - Wide Spread -->
+<path d="M 50,100 C 100,100 100,60 200,60 C 300,60 300,100 350,100" fill="none" opacity="0.6" stroke="#ff0055" stroke-dasharray="4 4" stroke-width="2"></path>
+<text fill="#ff0055" font-size="10" text-anchor="middle" x="320" y="50">Vitesse très incertaine (Δp grand)</text>
+<!-- Arrows illustrating Spread -->
+</svg>
+</div>
+<!-- Scenario 2: Speed Precise -->
+<div class="relative h-1/2 w-full">
+<div class="absolute top-0 left-0 text-xs font-bold text-[#ff0055] bg-[#1a1025] px-2 py-1 rounded border border-[#ff0055]">Cas 2 : Vitesse Précise</div>
+<svg class="w-full h-full overflow-visible" viewbox="0 0 400 120">
+<!-- Axis -->
+<line stroke="#4a5568" stroke-width="1" x1="20" x2="380" y1="100" y2="100"></line>
+<!-- Position (Cyan) - Wide Wave -->
+<path d="M 40,100 Q 60,60 80,100 T 120,100 T 160,100 T 200,100 T 240,100 T 280,100 T 320,100 T 360,100" fill="none" opacity="0.6" stroke="#00f3ff" stroke-width="2"></path>
+<text fill="#00f3ff" font-size="10" text-anchor="middle" x="320" y="75">Position floue (Δx grand)</text>
+<!-- Momentum (Pink) - Narrow Spike (representing specific value) -->
+<path class="glow-pink" d="M 180,100 Q 190,100 195,20 L 200,10 L 205,20 Q 210,100 220,100" fill="rgba(255,0,85,0.2)" height="60" stroke="#ff0055" stroke-width="2" width="10" x="195" y="40"></path>
+<text fill="#ff0055" font-size="10" text-anchor="middle" x="200" y="0">Vitesse précise (Δp petit)</text>
+<!-- Arrows illustrating Spread -->
+</svg>
+</div>
+<!-- SVG Defs -->
+<svg height="0" width="0">
+<defs>
+<marker id="arrow-cyan" markerheight="6" markerwidth="6" orient="auto" refx="5" refy="3">
+<path d="M0,0 L0,6 L6,3 z" fill="#00f3ff"></path>
+</marker>
+<marker id="arrow-cyan-rev" markerheight="6" markerwidth="6" orient="auto" refx="1" refy="3">
+<path d="M6,0 L6,6 L0,3 z" fill="#00f3ff"></path>
+</marker>
+</defs>
+</svg>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<div class="absolute bottom-6 left-12 right-12 flex justify-between items-center border-t border-gray-800 pt-3 text-xs text-gray-500">
+<div class="flex items-center space-x-2">
+<i class="fas fa-microscope"></i>
+<p class="m-0">Une propriété intrinsèque de la nature, pas une erreur de mesure</p>
+</div>
+<p class="m-0">17 / 34</p>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>L'Intrication Quantique - Animation</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #1a1025;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            width: 1910px;
+            height: 1070px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Glassmorphism */
+        .glass-panel {
+            background: rgba(45, 27, 78, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+        }
+
+        /* Animation Containers */
+        #simulation-canvas {
+            width: 100%;
+            height: 100%;
+            border-radius: 12px;
+            background-color: #150c1f; /* Replaced gradient with solid color */
+        }
+
+        /* Step Indicators */
+        .step-item {
+            transition: all 0.3s ease;
+            opacity: 0.5;
+            border-left: 3px solid transparent;
+            padding: 12px;
+            margin-bottom: 8px;
+            background: rgba(255,255,255,0.02);
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .step-item.active {
+            opacity: 1;
+            border-left: 3px solid #00f3ff;
+            background: rgba(0, 243, 255, 0.05);
+        }
+
+        .step-number {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+
+        .step-item.active .step-number {
+            background: #00f3ff;
+            color: #1a1025;
+            font-weight: bold;
+        }
+
+        /* Play Button Pulse */
+        @keyframes pulse-ring {
+            0% { transform: scale(0.8); box-shadow: 0 0 0 0 rgba(0, 243, 255, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(0, 243, 255, 0); }
+            100% { transform: scale(0.8); box-shadow: 0 0 0 0 rgba(0, 243, 255, 0); }
+        }
+        
+        .btn-pulse {
+            animation: pulse-ring 2s infinite;
+        }
+
+        .glow-text {
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+        }
+    </style>
+</head>
+<body class="flex flex-col relative">
+<!-- Header -->
+<header class="flex items-center justify-between px-12 pt-6 pb-2 z-20 h-24">
+<div>
+<div class="flex items-center space-x-3 mb-1">
+<span class="bg-[#2d1b4e] text-[#00f3ff] px-3 py-1 rounded text-xs font-bold uppercase tracking-widest border border-[#00f3ff] shadow-[0_0_10px_rgba(0,243,255,0.2)]">
+                    Principe Fondamental
+                </span>
+</div>
+<h1 class="text-3xl font-bold text-white tracking-tight">
+                L'Intrication <span class="text-[#00f3ff]">Quantique</span>
+</h1>
+</div>
+<!-- Legend/Key -->
+<div class="flex items-center space-x-6 text-xs text-gray-400 bg-[#2d1b4e] bg-opacity-50 px-4 py-2 rounded-full border border-gray-700">
+<div class="flex items-center">
+<span class="w-3 h-3 rounded-full bg-[#a855f7] mr-2 shadow-[0_0_5px_#a855f7]"></span>
+<p class="m-0">Superposition</p>
+</div>
+<div class="flex items-center">
+<span class="w-3 h-3 rounded-full bg-[#00f3ff] mr-2"></span>
+<p class="m-0">État A (Haut)</p>
+</div>
+<div class="flex items-center">
+<span class="w-3 h-3 rounded-full bg-[#ffd700] mr-2"></span>
+<p class="m-0">État B (Bas)</p>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<div class="flex-1 flex px-12 pb-8 gap-6 h-full overflow-hidden">
+<!-- Left: Simulation View -->
+<div class="w-3/4 relative glass-panel p-1 overflow-hidden shadow-2xl flex flex-col">
+<!-- Canvas for Entanglement Simulation -->
+<canvas height="560" id="simulation-canvas" width="940"></canvas>
+<!-- Overlay Labels -->
+<div class="absolute top-6 left-10 bg-black bg-opacity-60 px-3 py-1 rounded text-xs text-gray-300 pointer-events-none border border-gray-700">
+<p class="m-0 font-bold text-[#00f3ff]">PARIS</p>
+<p class="m-0 text-[10px]">Laboratoire A</p>
+</div>
+<div class="absolute top-6 right-10 bg-black bg-opacity-60 px-3 py-1 rounded text-xs text-gray-300 pointer-events-none border border-gray-700 text-right">
+<p class="m-0 font-bold text-[#ffd700]">TOKYO</p>
+<p class="m-0 text-[10px]">Laboratoire B</p>
+</div>
+<!-- Play/Reset Controls Overlay -->
+<div class="absolute bottom-6 left-6 flex space-x-3 z-30">
+<button class="bg-[#2d1b4e] hover:bg-[#3d2b5e] text-white px-4 py-2 rounded-lg border border-gray-600 transition flex items-center shadow-lg" id="restartBtn">
+<i class="fas fa-redo-alt mr-2 text-[#00f3ff]"></i> Relancer l'expérience
+                </button>
+</div>
+</div>
+<!-- Right: Explanation & Steps -->
+<div class="w-1/4 flex flex-col justify-between h-full">
+<div class="flex flex-col overflow-y-auto pr-2 padding-100">
+<!-- Step 1 -->
+<div class="step-item active" id="step-1">
+<div class="flex items-center mb-1">
+<div class="step-number">1</div>
+<h3 class="font-bold text-white text-sm">Génération de la paire</h3>
+</div>
+<p class="text-xs text-gray-400 leading-relaxed m-0">
+                        Deux particules sont créées ensemble. Elles partagent une même fonction d'onde : elles sont <strong>intriquées</strong>.
+                    </p>
+</div>
+<!-- Step 2 -->
+<div class="step-item" id="step-2">
+<div class="flex items-center mb-1">
+<div class="step-number">2</div>
+<h3 class="font-bold text-white text-sm">Séparation spatiale</h3>
+</div>
+<p class="text-xs text-gray-400 leading-relaxed m-0">
+                        On envoie la particule A à Paris et la B à Tokyo. Elles restent connectées malgré la distance (lien invisible).
+                    </p>
+</div>
+<!-- Step 3 -->
+<div class="step-item" id="step-3">
+<div class="flex items-center mb-1">
+<div class="step-number">3</div>
+<h3 class="font-bold text-[#00f3ff] text-sm glow-text">Mesure de A</h3>
+</div>
+<p class="text-xs text-gray-300 leading-relaxed m-0">
+                        On mesure A : elle prend l'état <span class="text-[#00f3ff]">HAUT</span>. Instantanément, B prend l'état <span class="text-[#ffd700]">BAS</span>.
+                    </p>
+</div>
+</div>
+<!-- Warning Box -->
+<div class="glass-panel p-4 mt-2 border-t-2 border-[#ff4d4d]">
+<div class="flex items-start">
+<i class="fas fa-exclamation-triangle text-[#ff4d4d] mt-1 mr-3"></i>
+<div>
+<p class="text-xs font-bold text-white mb-1">Attention !</p>
+<p class="text-[11px] text-gray-300 italic m-0">
+                            Cette corrélation est instantanée, mais ne permet <strong>pas</strong> de transmettre de l'information plus vite que la lumière (théorème de non-communication).
+                        </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<div class="absolute bottom-4 left-12 right-12 flex justify-between items-center text-xs text-gray-500 pt-2 border-t border-gray-800">
+<p class="m-0">Animation interactive : Intrication et non-localité</p>
+<p class="m-0">16 / 34</p>
+</div>
+<!-- Script for Canvas Animation -->
+<script>
+        const canvas = document.getElementById('simulation-canvas');
+        const ctx = canvas.getContext('2d');
+        const step1 = document.getElementById('step-1');
+        const step2 = document.getElementById('step-2');
+        const step3 = document.getElementById('step-3');
+
+        let width, height;
+        let animationFrame;
+        let time = 0;
+        let phase = 0; // 0: Creation, 1: Separation, 2: Measurement
+
+        // Particle State
+        const particleA = { x: 0, y: 0, color: '#a855f7', spin: 'unknown' };
+        const particleB = { x: 0, y: 0, color: '#a855f7', spin: 'unknown' };
+        
+        // Config
+        const centerY = 280;
+        const centerX = 470;
+        const targetDist = 300; // Distance from center
+        const separationSpeed = 4;
+
+        function resize() {
+            width = canvas.width;
+            height = canvas.height;
+            resetSimulation();
+        }
+        
+        function resetSimulation() {
+            time = 0;
+            phase = 0;
+            particleA.x = centerX;
+            particleA.y = centerY;
+            particleB.x = centerX;
+            particleB.y = centerY;
+            particleA.spin = 'unknown';
+            particleB.spin = 'unknown';
+            particleA.color = '#a855f7'; // Purple (superposition)
+            particleB.color = '#a855f7';
+            
+            updateSteps(1);
+        }
+
+        function updateSteps(currentStep) {
+            step1.classList.remove('active');
+            step2.classList.remove('active');
+            step3.classList.remove('active');
+            
+            if(currentStep >= 1) step1.classList.add('active');
+            if(currentStep >= 2) step2.classList.add('active');
+            if(currentStep >= 3) step3.classList.add('active');
+        }
+
+        function drawMapBackground() {
+            // Draw simple grid
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
+            ctx.lineWidth = 1;
+            const gridSize = 40;
+            
+            // Perspective grid effect
+            for(let x = 0; x <= width; x += gridSize) {
+                ctx.beginPath();
+                ctx.moveTo(x, 0);
+                ctx.lineTo(x, height);
+                ctx.stroke();
+            }
+            for(let y = 0; y <= height; y += gridSize) {
+                ctx.beginPath();
+                ctx.moveTo(0, y);
+                ctx.lineTo(width, y);
+                ctx.stroke();
+            }
+
+            // Draw Locations
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
+            // Paris
+            ctx.beginPath(); ctx.arc(centerX - targetDist, centerY, 60, 0, Math.PI*2); ctx.fill();
+            // Tokyo
+            ctx.beginPath(); ctx.arc(centerX + targetDist, centerY, 60, 0, Math.PI*2); ctx.fill();
+        }
+
+        function drawEntanglementLink() {
+            if (phase === 2 && time > 220) return; // Link breaks/fades after measurement
+            
+            const dist = particleB.x - particleA.x;
+            if (dist < 10) return;
+
+            ctx.beginPath();
+            const midX = (particleA.x + particleB.x) / 2;
+            
+            // Create a vibrating sine wave
+            ctx.moveTo(particleA.x, particleA.y);
+            
+            const frequency = 0.05;
+            const amplitude = 10 * Math.sin(time * 0.2) * (phase === 0 ? 0.2 : 1);
+            
+            for (let x = particleA.x; x <= particleB.x; x += 5) {
+                const normalizedX = (x - particleA.x) / dist; // 0 to 1
+                // Envelope function to make amplitude 0 at ends and max in middle
+                const envelope = Math.sin(normalizedX * Math.PI); 
+                
+                const y = centerY + Math.sin(x * frequency + time * 0.5) * amplitude * envelope;
+                ctx.lineTo(x, y);
+            }
+            
+            // Glow effect
+            ctx.shadowBlur = 15;
+            ctx.shadowColor = '#a855f7';
+            ctx.strokeStyle = `rgba(168, 85, 247, ${0.6 + Math.sin(time*0.2)*0.4})`;
+            ctx.lineWidth = 3;
+            ctx.stroke();
+            ctx.shadowBlur = 0;
+        }
+
+        function drawParticle(p, label) {
+            ctx.save();
+            ctx.translate(p.x, p.y);
+            
+            // Pulsing effect if unknown
+            const scale = p.spin === 'unknown' ? 1 + Math.sin(time * 0.1) * 0.1 : 1;
+            
+            // Glow
+            ctx.shadowBlur = 20;
+            ctx.shadowColor = p.color;
+            
+            // Core
+            ctx.fillStyle = p.color;
+            ctx.beginPath();
+            ctx.arc(0, 0, 15 * scale, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Rings
+            ctx.strokeStyle = 'white';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.arc(0, 0, 20 * scale, 0, Math.PI * 2);
+            ctx.stroke();
+
+            // Measurement Arrow
+            if (p.spin === 'up') {
+                ctx.beginPath();
+                ctx.moveTo(0, 5);
+                ctx.lineTo(0, -25);
+                ctx.lineTo(-5, -20);
+                ctx.moveTo(0, -25);
+                ctx.lineTo(5, -20);
+                ctx.stroke();
+                ctx.fillStyle = 'white';
+                ctx.font = 'bold 14px Poppins';
+                ctx.fillText("HAUT", -20, -40);
+            } else if (p.spin === 'down') {
+                ctx.beginPath();
+                ctx.moveTo(0, -5);
+                ctx.lineTo(0, 25);
+                ctx.lineTo(-5, 20);
+                ctx.moveTo(0, 25);
+                ctx.lineTo(5, 20);
+                ctx.stroke();
+                ctx.fillStyle = 'white';
+                ctx.font = 'bold 14px Poppins';
+                ctx.fillText("BAS", -15, 45);
+            }
+
+            ctx.restore();
+        }
+
+        function drawMeasurementDevice(x, y, active) {
+            if (!active) return;
+            ctx.save();
+            ctx.translate(x, y - 60);
+            ctx.fillStyle = '#333';
+            ctx.fillRect(-20, -20, 40, 40);
+            ctx.strokeStyle = '#00f3ff';
+            ctx.lineWidth = 2;
+            ctx.strokeRect(-20, -20, 40, 40);
+            
+            // Eye icon
+            ctx.fillStyle = '#00f3ff';
+            ctx.beginPath();
+            ctx.arc(0, 0, 10, 0, Math.PI*2);
+            ctx.fill();
+            
+            ctx.font = '10px Poppins';
+            ctx.fillStyle = '#fff';
+            ctx.fillText("MESURE", -20, -30);
+            ctx.restore();
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            drawMapBackground();
+
+            // Logic Flow
+            if (time < 100) {
+                // Phase 0: Creation / Spinning together
+                phase = 0;
+                particleA.x = centerX + Math.cos(time * 0.1) * 20;
+                particleA.y = centerY + Math.sin(time * 0.1) * 20;
+                particleB.x = centerX + Math.cos(time * 0.1 + Math.PI) * 20;
+                particleB.y = centerY + Math.sin(time * 0.1 + Math.PI) * 20;
+                updateSteps(1);
+            } else if (time < 200) {
+                // Phase 1: Separation
+                phase = 1;
+                const progress = (time - 100) / 100; // 0 to 1
+                // Ease out
+                const ease = 1 - Math.pow(1 - progress, 3);
+                
+                particleA.x = centerX - (targetDist * ease);
+                particleA.y = centerY;
+                particleB.x = centerX + (targetDist * ease);
+                particleB.y = centerY;
+                updateSteps(2);
+            } else {
+                // Phase 2: Arrived & Measurement
+                phase = 2;
+                particleA.x = centerX - targetDist;
+                particleB.x = centerX + targetDist;
+                updateSteps(3);
+
+                if (time === 200) {
+                    // Flash effect trigger could go here
+                }
+                
+                if (time > 200) {
+                    // Measurement happens
+                    particleA.color = '#00f3ff'; // Blue
+                    particleA.spin = 'up';
+                    
+                    // Instant correlation
+                    particleB.color = '#ffd700'; // Gold
+                    particleB.spin = 'down';
+                }
+            }
+
+            drawEntanglementLink();
+            drawParticle(particleA, "A");
+            drawParticle(particleB, "B");
+            
+            // Draw Measurement Device appearing over A
+            if (time >= 180) {
+                const opacity = Math.min(1, (time - 180)/20);
+                ctx.globalAlpha = opacity;
+                drawMeasurementDevice(particleA.x, particleA.y, true);
+                ctx.globalAlpha = 1;
+            }
+
+            time++;
+            animationFrame = requestAnimationFrame(animate);
+        }
+
+        resize();
+        animate();
+
+        document.getElementById('restartBtn').addEventListener('click', () => {
+            resetSimulation();
+        });
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+:root{
+  --bg: #0b0a12;
+  --panel: rgba(255,255,255,0.06);
+  --border: rgba(255,255,255,0.12);
+  --text: #eaeaf0;
+}
+
+*{ box-sizing:border-box; }
+html,body{ height:100%; margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background: var(--bg); color: var(--text); }
+
+.app{
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+.stage{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: black;
+  overflow: hidden;
+}
+
+.frame{
+  width: 1910px;
+  height: 1070px;
+  border: none;
+  background: black;
+
+  /* 🔑 scale automatique */
+  transform-origin: center center;
+}

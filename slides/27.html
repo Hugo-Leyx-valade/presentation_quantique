@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Comment fonctionne RSA (rappel)</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #1a1025;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            width: 1910px;
+            height: 1070px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Glassmorphism Panels */
+        .glass-panel {
+            background: rgba(45, 27, 78, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        /* Step Card Styling */
+        .step-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .step-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(0, 243, 255, 0.3);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .step-number {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 800;
+            opacity: 0.1;
+            position: absolute;
+            top: -10px;
+            right: 10px;
+            font-size: 4rem;
+            line-height: 1;
+        }
+
+        /* Connector Line */
+        .connector-line {
+            height: 2px;
+            background: rgba(255, 255, 255, 0.1);
+            position: relative;
+            flex-grow: 1;
+            margin: 0 10px;
+        }
+
+        .connector-line::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0; 
+            height: 0; 
+            border-top: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+            border-left: 5px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Requirements Grid */
+        .req-item {
+            border-left: 3px solid #333;
+            transition: all 0.3s;
+        }
+
+        .req-item:hover {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .req-prime { border-color: #00f3ff; }
+        .req-easy { border-color: #9f7aea; }
+        .req-hard { border-color: #ff0055; }
+
+    </style>
+</head>
+<body class="flex flex-col relative bg-[#1a1025]">
+<!-- Background Decor -->
+<div class="absolute inset-0 z-0 pointer-events-none">
+<div class="absolute top-0 right-0 w-[500px] h-[500px] bg-[#2d1b4e] rounded-full opacity-20 filter blur-[80px] transform translate-x-1/3 -translate-y-1/3"></div>
+<div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-[#00f3ff] rounded-full opacity-5 filter blur-[60px] transform -translate-x-1/3 translate-y-1/3"></div>
+</div>
+<!-- Main Content Container -->
+<div class="flex-1 flex flex-col p-12 relative z-10">
+<!-- Header -->
+<header class="flex items-center justify-between mb-10">
+<div>
+<div class="flex items-center space-x-3 mb-2">
+<span class="bg-[#2d1b4e] text-[#00f3ff] px-3 py-1 rounded text-xs font-bold uppercase tracking-widest border border-[#00f3ff] shadow-[0_0_10px_rgba(0,243,255,0.2)]">
+                        Cryptographie
+                    </span>
+<span class="text-gray-400 uppercase tracking-widest text-sm">Sécurité Classique</span>
+</div>
+<h1 class="text-4xl font-bold text-white tracking-tight">
+                    Fonctionnement de <span class="text-[#00f3ff]">RSA</span> (Rappel)
+</h1>
+</div>
+<div class="flex items-center space-x-4 bg-[#2d1b4e] bg-opacity-60 px-6 py-3 rounded-lg border border-gray-700">
+<i class="fas fa-lock text-2xl text-[#00f3ff]"></i>
+<div class="flex flex-col">
+<span class="text-xs text-gray-400 uppercase">Standard Actuel</span>
+<span class="text-sm font-bold text-white">Chiffrement Asymétrique</span>
+</div>
+</div>
+</header>
+<!-- Process Flow -->
+<div class="flex-1 flex flex-col justify-center mb-8">
+<div class="flex items-center justify-between gap-4 w-full">
+<!-- Step 1: Key Generation -->
+<div class="step-card flex-1 h-64 rounded-xl p-6 flex flex-col justify-between group">
+<div class="step-number group-hover:text-[#00f3ff] transition-colors">1</div>
+<div class="z-10">
+<div class="w-10 h-10 rounded-full bg-[#00f3ff] bg-opacity-10 flex items-center justify-center mb-4 text-[#00f3ff]">
+<i class="fas fa-key"></i>
+</div>
+<h3 class="text-lg font-bold text-white mb-2">Création des Clés</h3>
+<p class="text-xs text-gray-400 leading-relaxed">
+                            On choisit deux grands nombres premiers <strong>p</strong> et <strong>q</strong>. On calcule leur produit <strong>n = p × q</strong>. La clé publique contient (n, e).
+                        </p>
+</div>
+<div class="w-full h-1 bg-gray-700 mt-2 rounded overflow-hidden">
+<div class="h-full bg-[#00f3ff] w-full"></div>
+</div>
+</div>
+<div class="connector-line"></div>
+<!-- Step 2: Encryption -->
+<div class="step-card flex-1 h-64 rounded-xl p-6 flex flex-col justify-between group">
+<div class="step-number group-hover:text-[#9f7aea] transition-colors">2</div>
+<div class="z-10">
+<div class="w-10 h-10 rounded-full bg-[#9f7aea] bg-opacity-10 flex items-center justify-center mb-4 text-[#9f7aea]">
+<i class="fas fa-file-export"></i>
+</div>
+<h3 class="text-lg font-bold text-white mb-2">Chiffrement Facile</h3>
+<p class="text-xs text-gray-400 leading-relaxed">
+                            N'importe qui peut chiffrer un message avec la <strong>clé publique</strong>. L'opération mathématique (exponentiation modulaire) est rapide et simple.
+                        </p>
+</div>
+<div class="w-full h-1 bg-gray-700 mt-2 rounded overflow-hidden">
+<div class="h-full bg-[#9f7aea] w-full"></div>
+</div>
+</div>
+<div class="connector-line"></div>
+<!-- Step 3: Decryption Problem -->
+<div class="step-card flex-1 h-64 rounded-xl p-6 flex flex-col justify-between group border-[#ffd700] border-opacity-30">
+<div class="step-number group-hover:text-[#ffd700] transition-colors">3</div>
+<div class="z-10">
+<div class="w-10 h-10 rounded-full bg-[#ffd700] bg-opacity-10 flex items-center justify-center mb-4 text-[#ffd700]">
+<i class="fas fa-file-import"></i>
+</div>
+<h3 class="text-lg font-bold text-white mb-2">Déchiffrement</h3>
+<p class="text-xs text-gray-400 leading-relaxed">
+                            Seul le détenteur de la <strong>clé privée</strong> (liée à p et q) peut déchiffrer. Sans elle, il faut factoriser n, ce qui est impossible en temps raisonnable.
+                        </p>
+</div>
+<div class="w-full h-1 bg-gray-700 mt-2 rounded overflow-hidden">
+<div class="h-full bg-[#ffd700] w-full"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Infrastructure / Requirements Section -->
+<div class="glass-panel rounded-xl p-6 mt-auto">
+<h3 class="text-sm font-bold text-gray-300 uppercase tracking-widest mb-4 flex items-center">
+<i class="fas fa-shield-virus mr-2 text-gray-500"></i> Fondements de la Sécurité
+            </h3>
+<div class="grid grid-cols-3 gap-6">
+<!-- Requirement 1 -->
+<div class="req-item req-prime p-4 bg-black bg-opacity-20 rounded-r-lg">
+<div class="flex items-center mb-2">
+<i class="fas fa-calculator text-[#00f3ff] mr-3 text-lg"></i>
+<h4 class="font-bold text-white">Nombres Premiers</h4>
+</div>
+<p class="text-xs text-gray-400">
+                        La sécurité repose sur la difficulté mathématique de trouver les facteurs premiers p et q à partir de leur produit n (si n est très grand).
+                    </p>
+</div>
+<!-- Requirement 2 -->
+<div class="req-item req-easy p-4 bg-black bg-opacity-20 rounded-r-lg">
+<div class="flex items-center mb-2">
+<i class="fas fa-tachometer-alt text-[#9f7aea] mr-3 text-lg"></i>
+<h4 class="font-bold text-white">Asymétrie</h4>
+</div>
+<p class="text-xs text-gray-400">
+                        Il est facile de multiplier (chiffrer) mais extrêmement difficile de factoriser (déchiffrer sans clé). C'est une fonction à sens unique.
+                    </p>
+</div>
+<!-- Requirement 3 -->
+<div class="req-item req-hard p-4 bg-black bg-opacity-20 rounded-r-lg">
+<div class="flex items-center mb-2">
+<i class="fas fa-clock text-[#ff0055] mr-3 text-lg"></i>
+<h4 class="font-bold text-white">Coût Temporel</h4>
+</div>
+<p class="text-xs text-gray-400">
+                        Avec un ordinateur classique, casser une clé RSA de 2048 bits prendrait plus de temps que l'âge de l'univers.
+                    </p>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<div class="flex justify-between items-center text-xs text-gray-500 pt-4 mt-2">
+<p class="m-0 flex items-center">
+<i class="fas fa-info-circle mr-2"></i> 
+                C'est ce mécanisme qui protège actuellement vos paiements bancaires et communications sécurisées.
+            </p>
+<p class="m-0">27 / 34</p>
+</div>
+</div>
+</body>
+</html>

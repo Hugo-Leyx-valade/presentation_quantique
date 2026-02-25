@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Pourquoi le quantique est une menace</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #1a1025;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            width: 1910px;
+            height: 1070px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Glassmorphism Panels */
+        .glass-panel {
+            background: rgba(45, 27, 78, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+        }
+
+        /* Challenge Cards */
+        .challenge-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .challenge-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-red { border-top: 4px solid #ff0055; }
+        .card-red:hover { border-color: #ff2a6d; box-shadow: 0 10px 20px rgba(255, 0, 85, 0.2); }
+        .icon-red { color: #ff0055; background: rgba(255, 0, 85, 0.1); }
+
+        .card-orange { border-top: 4px solid #ff9f43; }
+        .card-orange:hover { border-color: #ffb168; box-shadow: 0 10px 20px rgba(255, 159, 67, 0.2); }
+        .icon-orange { color: #ff9f43; background: rgba(255, 159, 67, 0.1); }
+
+        .card-yellow { border-top: 4px solid #ffd700; }
+        .card-yellow:hover { border-color: #ffe033; box-shadow: 0 10px 20px rgba(255, 215, 0, 0.2); }
+        .icon-yellow { color: #ffd700; background: rgba(255, 215, 0, 0.1); }
+
+        /* Pulse Animation for Critical Icons */
+        @keyframes subtle-pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        .pulse-icon {
+            animation: subtle-pulse 3s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body class="flex flex-col relative bg-[#1a1025]">
+<!-- Background Decor -->
+<div class="absolute inset-0 z-0 pointer-events-none">
+<div class="absolute -top-20 -left-20 w-96 h-96 bg-[#ff0055] rounded-full opacity-5 filter blur-[100px]"></div>
+<div class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-[#2d1b4e] rounded-full opacity-30 filter blur-[80px]"></div>
+</div>
+<!-- Main Content Container -->
+<div class="flex-1 flex flex-col p-12 relative z-10">
+<!-- Header -->
+<header class="flex items-start justify-between mb-10">
+<div>
+<div class="flex items-center space-x-3 mb-2">
+<span class="bg-[#2d1b4e] text-[#ff0055] px-3 py-1 rounded text-xs font-bold uppercase tracking-widest border border-[#ff0055] shadow-[0_0_10px_rgba(255,0,85,0.2)]">
+<i class="fas fa-radiation-alt mr-2"></i> Menace Cryptographique
+                    </span>
+<span class="text-gray-400 uppercase tracking-widest text-sm">Sécurité des Données</span>
+</div>
+<h1 class="text-4xl font-bold text-white tracking-tight">
+                    Pourquoi le quantique est une <span class="text-[#ff0055]">Menace</span> ?
+                </h1>
+<p class="text-gray-400 mt-2 max-w-2xl">
+                    La puissance de calcul quantique remet en cause les fondements mathématiques de notre sécurité numérique mondiale.
+                </p>
+</div>
+<!-- Context Stat -->
+<div class="glass-panel px-6 py-4 flex flex-col items-end border-l-4 border-[#ff0055]">
+<span class="text-3xl font-bold text-white">RSA-2048</span>
+<span class="text-xs text-gray-400 uppercase">Standard actuel de chiffrement</span>
+<span class="text-xs text-[#ff0055] mt-1 font-bold"><i class="fas fa-unlock-alt mr-1"></i> Vulnérable</span>
+</div>
+</header>
+<!-- Main Grid: Threats -->
+<div class="grid grid-cols-3 gap-8 mb-8">
+<!-- Card 1: Shor (Critical) -->
+<div class="challenge-card card-red p-6 rounded-xl flex flex-col">
+<div class="flex justify-between items-start mb-4">
+<div class="w-12 h-12 rounded-full icon-red flex items-center justify-center text-xl pulse-icon">
+<i class="fas fa-key"></i>
+</div>
+<span class="text-xs font-bold text-[#ff0055] bg-[#ff0055] bg-opacity-10 px-2 py-1 rounded">ALGORITHME DE SHOR</span>
+</div>
+<h3 class="text-xl font-bold text-white mb-2">Factorisation Rapide</h3>
+<p class="text-sm text-gray-300 mb-4 flex-1">
+                    Les ordinateurs classiques mettent des milliards d'années à casser RSA. Un ordinateur quantique pourrait le faire en quelques heures grâce à l'algorithme de Shor.
+                </p>
+<div class="bg-black bg-opacity-30 p-3 rounded text-xs text-gray-400">
+<i class="fas fa-skull-crossbones text-[#ff0055] mr-2"></i> Effondrement du chiffrement asymétrique.
+                </div>
+</div>
+<!-- Card 2: CNDL (High) -->
+<div class="challenge-card card-orange p-6 rounded-xl flex flex-col">
+<div class="flex justify-between items-start mb-4">
+<div class="w-12 h-12 rounded-full icon-orange flex items-center justify-center text-xl">
+<i class="fas fa-hourglass-half"></i>
+</div>
+<span class="text-xs font-bold text-[#ff9f43] bg-[#ff9f43] bg-opacity-10 px-2 py-1 rounded">STRATÉGIE PIRATE</span>
+</div>
+<h3 class="text-xl font-bold text-white mb-2">"Collect Now, Decrypt Later"</h3>
+<p class="text-sm text-gray-300 mb-4 flex-1">
+                    Les attaquants volent et stockent des données chiffrées aujourd'hui (secrets d'état, santé, bancaire) pour les déchiffrer dès que la technologie sera disponible.
+                </p>
+<div class="bg-black bg-opacity-30 p-3 rounded text-xs text-gray-400">
+<i class="fas fa-exclamation-circle text-[#ff9f43] mr-2"></i> Vos secrets actuels sont déjà en danger.
+                </div>
+</div>
+<!-- Card 3: Impact (Global) -->
+<div class="challenge-card card-yellow p-6 rounded-xl flex flex-col">
+<div class="flex justify-between items-start mb-4">
+<div class="w-12 h-12 rounded-full icon-yellow flex items-center justify-center text-xl">
+<i class="fas fa-globe-americas"></i>
+</div>
+<span class="text-xs font-bold text-[#ffd700] bg-[#ffd700] bg-opacity-10 px-2 py-1 rounded">IMPACT MONDIAL</span>
+</div>
+<h3 class="text-xl font-bold text-white mb-2">Obsolescence de RSA &amp; ECC</h3>
+<p class="text-sm text-gray-300 mb-4 flex-1">
+                    RSA et les Courbes Elliptiques (ECC) protègent tout : HTTPS, VPN, signatures numériques, Blockchains. Tout cela deviendrait non sécurisé.
+                </p>
+<div class="bg-black bg-opacity-30 p-3 rounded text-xs text-gray-400">
+<i class="fas fa-shield-alt text-[#ffd700] mr-2"></i> Nécessité de migration massive.
+                </div>
+</div>
+</div>
+<!-- Future Section: Timeline Warning -->
+<div class="glass-panel p-6 rounded-xl mt-auto relative overflow-hidden">
+<!-- Removed gradient background as per requirement, used solid color overlay instead -->
+<div class="absolute top-0 right-0 w-64 h-full bg-[#ff0055] opacity-5"></div>
+<div class="flex items-center mb-4">
+<div class="w-10 h-10 rounded-full bg-[#ff0055] bg-opacity-20 flex items-center justify-center text-[#ff0055] mr-4">
+<i class="fas fa-stopwatch"></i>
+</div>
+<div>
+<h3 class="text-lg font-bold text-white">Course contre la montre</h3>
+<p class="text-sm text-gray-400">La migration vers la cryptographie post-quantique prendra des années.</p>
+</div>
+</div>
+<div class="flex items-center justify-between space-x-4 bg-black bg-opacity-20 p-4 rounded-lg">
+<div class="text-center flex-1 border-r border-gray-700">
+<p class="text-xs font-bold text-gray-300">AUJOURD'HUI</p>
+<p class="text-[10px] text-gray-500">Données vulnérables à CNDL</p>
+</div>
+<div class="text-center flex-1 border-r border-gray-700">
+<p class="text-xs font-bold text-[#ff9f43]">~2030</p>
+<p class="text-[10px] text-gray-500">Premiers risques majeurs</p>
+</div>
+<div class="text-center flex-1">
+<p class="text-xs font-bold text-[#ff0055]">JOUR Q</p>
+<p class="text-[10px] text-gray-500">Ordinateur quantique casse RSA</p>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<div class="flex justify-between items-center text-xs text-gray-500 pt-4 mt-2">
+<p class="m-0 flex items-center">
+<i class="fas fa-info-circle mr-2"></i> La menace est théorique aujourd'hui mais certaine demain.
+            </p>
+<p class="m-0">28 / 34</p>
+</div>
+</div>
+</body>
+</html>

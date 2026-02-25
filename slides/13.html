@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Superposition : Être dans plusieurs états</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #1a1025;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            width: 1910px;
+            height: 1070px;
+            overflow: hidden;
+        }
+
+        /* Glassmorphism Panels */
+        .glass-panel {
+            background: rgba(45, 27, 78, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+        }
+
+        .highlight-box {
+            background: rgba(0, 243, 255, 0.05);
+            border-left: 4px solid #00f3ff;
+        }
+
+        .highlight-box-pink {
+            background: rgba(255, 0, 85, 0.05);
+            border-left: 4px solid #ff0055;
+        }
+
+        /* Typography */
+        h1 {
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .glow-text {
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+        }
+
+        .glow-text-pink {
+            text-shadow: 0 0 10px rgba(255, 0, 85, 0.5);
+        }
+
+        /* Animation specific */
+        @keyframes spin-coin {
+            0% { transform: rotateY(0deg); }
+            100% { transform: rotateY(360deg); }
+        }
+
+        .spinning-coin {
+            animation: spin-coin 1.5s linear infinite;
+            transform-style: preserve-3d;
+        }
+
+        .coin-face {
+            background: linear-gradient(135deg, #ffd700, #b8860b);
+            border-radius: 50%;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+        }
+    </style>
+</head>
+<body class="flex flex-col relative">
+<!-- Background Decor -->
+<div class="absolute top-0 right-0 w-full h-full overflow-hidden z-0 pointer-events-none">
+<div class="absolute -top-20 -right-20 w-96 h-96 bg-[#2d1b4e] rounded-full filter blur-3xl opacity-40"></div>
+<div class="absolute bottom-0 left-20 w-64 h-64 bg-[#00f3ff] rounded-full filter blur-3xl opacity-5"></div>
+<!-- Abstract Particles -->
+<div class="absolute top-1/3 left-10 text-[#00f3ff] opacity-10 text-xl"><i class="fas fa-atom"></i></div>
+<div class="absolute bottom-1/4 right-1/4 text-[#ff0055] opacity-10 text-xl"><i class="fas fa-layer-group"></i></div>
+</div>
+<!-- Main Container -->
+<div class="flex-1 flex flex-col p-12 relative z-10">
+<!-- Header -->
+<header class="flex items-center justify-between mb-6">
+<div>
+<div class="flex items-center space-x-3 mb-2">
+<span class="bg-[#2d1b4e] text-[#00f3ff] px-3 py-1 rounded text-sm font-bold border border-[#00f3ff] shadow-[0_0_10px_rgba(0,243,255,0.2)]">Principe #3</span>
+<span class="text-gray-400 uppercase tracking-widest text-sm">Fondamentaux</span>
+</div>
+<h1 class="text-4xl font-bold text-white tracking-tight">Le Principe de <span class="text-[#00f3ff]">Superposition</span></h1>
+</div>
+<div class="w-16 h-16 rounded-full bg-gradient-to-br from-gray-700 to-gray-900 border-2 border-gray-600 flex items-center justify-center overflow-hidden shadow-lg">
+<i class="fas fa-coins text-3xl text-gray-300"></i>
+</div>
+</header>
+<!-- Content Split -->
+<div class="flex-1 flex gap-10">
+<!-- Left Column: Text & Concept -->
+<div class="w-5/12 flex flex-col justify-center space-y-5">
+<!-- Definition -->
+<div class="glass-panel p-6">
+<h3 class="text-[#00f3ff] font-bold text-lg mb-2 flex items-center">
+<i class="fas fa-info-circle mr-2"></i> Ni 0, Ni 1... Les deux !
+                    </h3>
+<p class="text-gray-300 text-sm leading-relaxed mb-0">
+                        En informatique classique, un bit est soit 0, soit 1. En physique quantique, un système (comme un électron ou un photon) peut être dans une <strong>combinaison</strong> de plusieurs états simultanément.
+                    </p>
+</div>
+<!-- Analogy -->
+<div class="highlight-box p-5 rounded-r-xl bg-opacity-10 backdrop-filter backdrop-blur-sm">
+<h3 class="text-[#ffd700] font-bold text-lg mb-2 flex items-center">
+<i class="fas fa-lightbulb mr-2"></i> L'Analogie de la Pièce
+                    </h3>
+<p class="text-gray-200 text-sm mb-0 leading-relaxed">
+                        Imaginez une pièce de monnaie qui tourne sur une table. Tant qu'elle tourne, est-elle <strong>Pile</strong> ou <strong>Face</strong> ?<br/>
+<span class="block mt-2 text-white font-medium">Elle est un mélange des deux. C'est la superposition.</span>
+</p>
+</div>
+<!-- Measurement -->
+<div class="highlight-box-pink p-5 rounded-r-xl bg-opacity-10 backdrop-filter backdrop-blur-sm">
+<h3 class="text-[#ff0055] font-bold text-lg mb-2 flex items-center">
+<i class="fas fa-eye mr-2"></i> Le Rôle de la Mesure
+                    </h3>
+<p class="text-gray-200 text-sm mb-0 leading-relaxed">
+                        Dès qu'on arrête la pièce (la mesure), elle "choisit" un camp. La superposition s'effondre pour donner un résultat unique : Pile OU Face.
+                    </p>
+</div>
+</div>
+<!-- Right Column: Visual Illustration -->
+<div class="w-7/12 relative glass-panel p-0 flex flex-col overflow-hidden">
+<div class="absolute top-4 right-4 z-20">
+<span class="text-xs font-bold text-gray-500 uppercase tracking-widest border border-gray-600 px-2 py-1 rounded">Visualisation</span>
+</div>
+<div class="flex-1 flex flex-col items-center justify-center relative">
+<!-- Central Visualization Area using SVG -->
+<svg class="w-full h-full" viewbox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<lineargradient id="coinGrad" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" style="stop-color:#ffd700;stop-opacity:1"></stop>
+<stop offset="100%" style="stop-color:#b8860b;stop-opacity:1"></stop>
+</lineargradient>
+<filter id="blurFilter">
+<fegaussianblur in="SourceGraphic" stddeviation="2"></fegaussianblur>
+</filter>
+<marker id="arrow" markerheight="10" markerunits="strokeWidth" markerwidth="10" orient="auto" refx="9" refy="3">
+<path d="M0,0 L0,6 L9,3 z" fill="#a0aec0"></path>
+</marker>
+</defs>
+<!-- Central Concept: Superposition -->
+<g transform="translate(300, 120)">
+<!-- Text Label -->
+<text class="glow-text" fill="#00f3ff" font-family="Poppins" font-size="18" font-weight="bold" text-anchor="middle" x="0" y="-70">ÉTAT SUPERPOSÉ</text>
+<text fill="#a0aec0" font-family="Poppins" font-size="12" text-anchor="middle" x="0" y="-55">Avant la mesure</text>
+<!-- Spinning Coin Representation -->
+<!-- Back blurring circles to simulate motion -->
+<ellipse cx="0" cy="0" fill="none" opacity="0.3" rx="35" ry="35" stroke="#ffd700" stroke-width="2"></ellipse>
+<ellipse cx="0" cy="0" fill="none" opacity="0.5" rx="25" ry="35" stroke="#ffd700" stroke-width="2"></ellipse>
+<ellipse cx="0" cy="0" fill="none" opacity="0.7" rx="10" ry="35" stroke="#ffd700" stroke-width="2"></ellipse>
+<line stroke="#ffd700" stroke-linecap="round" stroke-width="4" x1="0" x2="0" y1="-45" y2="45"></line>
+<!-- Speed lines -->
+<path d="M-40,-20 A 50 50 0 0 1 40 -20" fill="none" opacity="0.5" stroke="#ffffff" stroke-dasharray="5,5" stroke-width="1"></path>
+<path d="M-40,20 A 50 50 0 0 0 40 20" fill="none" opacity="0.5" stroke="#ffffff" stroke-dasharray="5,5" stroke-width="1"></path>
+<!-- Mathematical Notation -->
+<foreignobject height="40" width="120" x="-60" y="55">
+</foreignobject>
+</g>
+<!-- Arrows leading to outcomes -->
+<path d="M 300, 200 L 180, 280" marker-end="url(#arrow)" stroke="#a0aec0" stroke-dasharray="5,5" stroke-width="2"></path>
+<path d="M 300, 200 L 420, 280" marker-end="url(#arrow)" stroke="#a0aec0" stroke-dasharray="5,5" stroke-width="2"></path>
+<!-- Eye Icon (Measurement) -->
+<g transform="translate(300, 200)">
+<circle cx="0" cy="0" fill="#1a1025" r="20" stroke="#ff0055" stroke-width="2"></circle>
+<path d="M-10,0 Q0,-10 10,0 Q0,10 -10,0" fill="none" stroke="#ff0055" stroke-width="2"></path>
+<circle cx="0" cy="0" fill="#ff0055" r="3"></circle>
+<text fill="#ff0055" font-family="Poppins" font-size="12" font-weight="bold" x="30" y="5">MESURE</text>
+</g>
+<!-- Outcome 1: Heads -->
+<g transform="translate(150, 320)">
+<circle cx="0" cy="0" fill="url(#coinGrad)" r="30" stroke="#b8860b" stroke-width="2"></circle>
+<text fill="#5c4002" font-family="Poppins" font-size="14" font-weight="bold" text-anchor="middle" x="0" y="5">PILE</text>
+<text fill="#ffffff" font-family="Poppins" font-size="14" font-weight="bold" text-anchor="middle" x="0" y="45">État |0⟩</text>
+<text fill="#a0aec0" font-family="Poppins" font-size="10" text-anchor="middle" x="0" y="60">Probabilité P = |α|²</text>
+</g>
+<!-- Outcome 2: Tails -->
+<g transform="translate(450, 320)">
+<circle cx="0" cy="0" fill="url(#coinGrad)" r="30" stroke="#b8860b" stroke-width="2"></circle>
+<text fill="#5c4002" font-family="Poppins" font-size="14" font-weight="bold" text-anchor="middle" x="0" y="5">FACE</text>
+<text fill="#ffffff" font-family="Poppins" font-size="14" font-weight="bold" text-anchor="middle" x="0" y="45">État |1⟩</text>
+<text fill="#a0aec0" font-family="Poppins" font-size="10" text-anchor="middle" x="0" y="60">Probabilité P = |β|²</text>
+</g>
+</svg>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<div class="absolute bottom-6 left-12 right-12 flex justify-between items-center border-t border-gray-800 pt-3 text-xs text-gray-500">
+<div class="flex items-center space-x-2">
+<i class="fas fa-layer-group"></i>
+<p class="m-0">Une particule peut emprunter plusieurs chemins à la fois</p>
+</div>
+<p class="m-0">13 / 34</p>
+</div>
+</div>
+</body>
+</html>

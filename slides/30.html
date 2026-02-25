@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Cassage d'une clé RSA - Animation</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #1a1025;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            width: 1910px;
+            height: 1070px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Glassmorphism */
+        .glass-panel {
+            background: rgba(45, 27, 78, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+        }
+
+        /* Animation Containers */
+        #rsa-canvas {
+            width: 100%;
+            height: 100%;
+            border-radius: 12px;
+            background: radial-gradient(circle at center, #2d1b4e 0%, #0f0916 100%);
+        }
+
+        /* Step Indicators */
+        .step-item {
+            transition: all 0.3s ease;
+            opacity: 0.5;
+            border-left: 3px solid transparent;
+        }
+        
+        .step-item.active {
+            opacity: 1;
+            border-left: 3px solid #ff0055; /* Red/Pink for Danger/Attack theme */
+            background: rgba(255, 0, 85, 0.1);
+        }
+
+        .step-number {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            margin-right: 10px;
+        }
+
+        .step-item.active .step-number {
+            background: #ff0055;
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        /* Play Button Pulse */
+        @keyframes pulse-ring {
+            0% { transform: scale(0.8); box-shadow: 0 0 0 0 rgba(255, 0, 85, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(255, 0, 85, 0); }
+            100% { transform: scale(0.8); box-shadow: 0 0 0 0 rgba(255, 0, 85, 0); }
+        }
+        
+        .btn-pulse {
+            animation: pulse-ring 2s infinite;
+        }
+
+    </style>
+</head>
+<body class="flex flex-col relative">
+<!-- Header -->
+<header class="flex items-center justify-between px-12 pt-8 pb-4 z-20">
+<div>
+<div class="flex items-center space-x-3 mb-2">
+<span class="bg-[#2d1b4e] text-[#ff0055] px-3 py-1 rounded text-xs font-bold uppercase tracking-widest border border-[#ff0055] shadow-[0_0_10px_rgba(255,0,85,0.2)]">
+                    Menace Cryptographique
+                </span>
+</div>
+<h1 class="text-3xl font-bold text-white tracking-tight">
+                L'Algorithme de <span class="text-[#ff0055]">Shor</span> vs RSA
+            </h1>
+</div>
+<!-- Legend/Key -->
+<div class="flex items-center space-x-6 text-xs text-gray-400 bg-[#2d1b4e] bg-opacity-50 px-4 py-2 rounded-full border border-gray-700">
+<div class="flex items-center">
+<i class="fas fa-lock text-white mr-2"></i>
+                Donnée Chiffrée (N)
+            </div>
+<div class="flex items-center">
+<i class="fas fa-atom text-[#00f3ff] mr-2"></i>
+                Calcul Quantique
+            </div>
+<div class="flex items-center">
+<i class="fas fa-key text-[#ff0055] mr-2"></i>
+                Clé Cassée
+            </div>
+</div>
+</header>
+<!-- Main Content -->
+<div class="flex-1 flex px-12 pb-10 gap-8">
+<!-- Left: Simulation View -->
+<div class="w-3/4 relative glass-panel p-1 overflow-hidden shadow-2xl flex flex-col">
+<!-- Canvas for Simulation -->
+<canvas height="500" id="rsa-canvas" width="900"></canvas>
+<!-- Overlay Labels -->
+<div class="absolute top-4 left-4 bg-black bg-opacity-60 px-3 py-1 rounded text-xs text-gray-300 pointer-events-none" id="status-label">
+                État: Initialisation...
+            </div>
+<!-- Play/Reset Controls Overlay -->
+<div class="absolute bottom-6 left-6 flex space-x-3 z-30">
+<button class="bg-[#2d1b4e] hover:bg-[#3d2b5e] text-white px-4 py-2 rounded-lg border border-gray-600 transition flex items-center shadow-lg" id="restartBtn">
+<i class="fas fa-redo-alt mr-2 text-[#ff0055]"></i> Relancer l'attaque
+                </button>
+</div>
+</div>
+<!-- Right: Explanation & Steps -->
+<div class="w-1/4 flex flex-col space-y-3 justify-center" id="steps-container">
+<div class="step-item active p-3 rounded-lg" id="step-0">
+<div class="flex items-center mb-1">
+<div class="step-number">1</div>
+<h3 class="font-bold text-white text-sm">Choix de N</h3>
+</div>
+<p class="text-xs text-gray-400 leading-tight">
+                    On intercepte la clé publique <strong>N</strong> (produit de deux nombres premiers p et q). Sans la clé privée, le message est illisible.
+                </p>
+</div>
+<div class="step-item p-3 rounded-lg" id="step-1">
+<div class="flex items-center mb-1">
+<div class="step-number">2</div>
+<h3 class="font-bold text-white text-sm">Recherche de période (r)</h3>
+</div>
+<p class="text-xs text-gray-400 leading-tight">
+                    Le processeur quantique utilise la <strong>superposition</strong> pour trouver la période <em>r</em> d'une fonction modulaire. C'est l'étape impossible pour un PC classique.
+                </p>
+</div>
+<div class="step-item p-3 rounded-lg" id="step-2">
+<div class="flex items-center mb-1">
+<div class="step-number">3</div>
+<h3 class="font-bold text-white text-sm">Calcul des facteurs</h3>
+</div>
+<p class="text-xs text-gray-400 leading-tight">
+                    Avec <em>r</em>, un calcul classique simple (PGCD) révèle instantanément les facteurs secrets <strong>p</strong> et <strong>q</strong>.
+                </p>
+</div>
+<div class="step-item p-3 rounded-lg" id="step-3">
+<div class="flex items-center mb-1">
+<div class="step-number">4</div>
+<h3 class="font-bold text-[#ff0055] text-sm shadow-glow">Clé reconstituée</h3>
+</div>
+<p class="text-xs text-gray-300 leading-tight">
+                    La clé privée est déduite. Le cadenas s'ouvre. Le chiffrement RSA est brisé.
+                </p>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<div class="absolute bottom-4 left-12 right-12 flex justify-between items-center text-xs text-gray-500 pt-2 border-t border-gray-800">
+<p class="m-0">Simulation : Menace de l'ordinateur quantique sur la cryptographie actuelle</p>
+<p class="m-0">30 / 34</p>
+</div>
+<!-- Script for Canvas Animation -->
+<script>
+        const canvas = document.getElementById('rsa-canvas');
+        const ctx = canvas.getContext('2d');
+        const statusLabel = document.getElementById('status-label');
+        
+        let width, height;
+        let animationId;
+        let frame = 0;
+        
+        // Simulation Constants
+        const N_VALUE = "3233"; // Example Public Key
+        const P_VALUE = "53";
+        const Q_VALUE = "61";
+        const MESSAGE = "CONFIDENTIEL";
+        
+        // Timing
+        const PHASE_1_DUR = 300; // Show N
+        const PHASE_2_DUR = 400; // Quantum Search
+        const PHASE_3_DUR = 300; // Factors
+        const PHASE_4_DUR = 350; // Unlock
+        const TOTAL_CYCLE = PHASE_1_DUR + PHASE_2_DUR + PHASE_3_DUR + PHASE_4_DUR;
+
+        function resize() {
+            width = canvas.width;
+            height = canvas.height;
+        }
+        resize();
+
+        // Particles for Quantum Effect
+        const particles = [];
+        for(let i=0; i<50; i++) {
+            particles.push({
+                x: Math.random() * 900,
+                y: Math.random() * 500,
+                speed: Math.random() * 2 + 0.5,
+                angle: Math.random() * Math.PI * 2,
+                size: Math.random() * 3
+            });
+        }
+
+        function updateStepUI(activeStepIndex) {
+            for (let i = 0; i < 4; i++) {
+                const el = document.getElementById(`step-${i}`);
+                if (i === activeStepIndex) {
+                    el.classList.add('active');
+                    el.classList.remove('opacity-50');
+                } else {
+                    el.classList.remove('active');
+                    el.classList.add('opacity-50');
+                }
+            }
+        }
+
+        function drawLock(x, y, scale, isOpen, color) {
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.scale(scale, scale);
+            
+            // Shackle
+            ctx.beginPath();
+            ctx.lineWidth = 15;
+            ctx.strokeStyle = '#cccccc';
+            ctx.lineCap = 'round';
+            
+            if (isOpen) {
+                ctx.moveTo(35, -30);
+                ctx.arc(0, -30, 35, 0, Math.PI, true);
+                ctx.lineTo(-35, -10);
+                ctx.rotate(-0.5); // Open angle
+                ctx.translate(10, -20);
+            } else {
+                ctx.arc(0, -30, 35, Math.PI, 0);
+                ctx.lineTo(35, 0);
+                ctx.lineTo(-35, 0);
+                ctx.lineTo(-35, -30);
+            }
+            ctx.stroke();
+            
+            if (isOpen) ctx.setTransform(scale, 0, 0, scale, x, y); // Reset rotation
+
+            // Body
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            ctx.roundRect(-50, 0, 100, 80, 10);
+            ctx.fill();
+            
+            // Keyhole
+            ctx.fillStyle = '#1a1025';
+            ctx.beginPath();
+            ctx.arc(0, 30, 10, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.moveTo(0, 30);
+            ctx.lineTo(8, 55);
+            ctx.lineTo(-8, 55);
+            ctx.fill();
+
+            ctx.restore();
+        }
+
+        function drawMatrixRain() {
+            ctx.fillStyle = 'rgba(0, 243, 255, 0.05)';
+            ctx.font = '14px monospace';
+            for(let i=0; i<10; i++) {
+                ctx.fillText(Math.random() > 0.5 ? '1' : '0', Math.random() * width, Math.random() * height);
+            }
+        }
+
+        function drawGraph(progress) {
+            // Visualizing finding the period 'r'
+            const centerY = height/2 + 50;
+            const startX = width/2 - 150;
+            const endX = width/2 + 150;
+            
+            ctx.beginPath();
+            ctx.strokeStyle = '#00f3ff';
+            ctx.lineWidth = 3;
+            
+            for (let x = startX; x <= endX; x+=2) {
+                // Constructive interference pattern emerging
+                let y = centerY;
+                const freq = 0.1;
+                // Noise reduces as progress increases
+                const noise = (1 - progress) * Math.sin(x * 0.5 + frame * 0.1) * 30;
+                // Signal emerges
+                const signal = progress * Math.abs(Math.sin((x - startX) * freq)) * -80;
+                
+                y += noise + signal;
+                
+                if (x === startX) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            }
+            ctx.stroke();
+            
+            if (progress > 0.8) {
+                ctx.fillStyle = '#00f3ff';
+                ctx.font = 'bold 20px Poppins';
+                ctx.fillText("Période r trouvée !", width/2 - 80, centerY + 40);
+            }
+        }
+
+        function drawSimulation() {
+            ctx.clearRect(0, 0, width, height);
+            drawMatrixRain();
+
+            let currentCycleFrame = frame % TOTAL_CYCLE;
+            
+            // PHASE 1: CHOIX DE N (Public Key)
+            if (currentCycleFrame < PHASE_1_DUR) {
+                updateStepUI(0);
+                statusLabel.innerText = "État: Interception Clé Publique (N)";
+                
+                drawLock(width/2, height/2 - 20, 1.5, false, '#4a5568');
+                
+                ctx.fillStyle = '#ffffff';
+                ctx.font = 'bold 40px Poppins';
+                ctx.textAlign = 'center';
+                ctx.fillText(`N = ${N_VALUE}`, width/2, height/2 + 100);
+                
+                ctx.font = '16px Poppins';
+                ctx.fillStyle = '#a0aec0';
+                ctx.fillText("(Produit de 2 nombres premiers inconnus)", width/2, height/2 + 130);
+            }
+            // PHASE 2: QUANTUM SEARCH (Finding r)
+            else if (currentCycleFrame < PHASE_1_DUR + PHASE_2_DUR) {
+                updateStepUI(1);
+                statusLabel.innerText = "État: Algorithme de Shor (Superposition)";
+                
+                const progress = (currentCycleFrame - PHASE_1_DUR) / PHASE_2_DUR;
+                
+                // Quantum Particles swirling around lock
+                ctx.save();
+                ctx.translate(width/2, height/2 - 20);
+                
+                // Draw ghost lock
+                drawLock(0, 0, 1.5, false, 'rgba(74, 85, 104, 0.3)');
+                
+                // Particles
+                particles.forEach((p, i) => {
+                    const radius = 100 - progress * 80; // Converging
+                    const angle = p.angle + frame * 0.05;
+                    const px = Math.cos(angle) * radius;
+                    const py = Math.sin(angle) * radius;
+                    
+                    ctx.fillStyle = '#00f3ff';
+                    ctx.beginPath();
+                    ctx.arc(px, py, p.size, 0, Math.PI*2);
+                    ctx.fill();
+                });
+                ctx.restore();
+
+                drawGraph(progress);
+            }
+            // PHASE 3: CALCULATE FACTORS
+            else if (currentCycleFrame < PHASE_1_DUR + PHASE_2_DUR + PHASE_3_DUR) {
+                updateStepUI(2);
+                statusLabel.innerText = "État: Calcul Classique (PGCD)";
+                
+                drawLock(width/2, height/2 - 20, 1.5, false, '#4a5568');
+
+                // Animate factors splitting out
+                const subProgress = (currentCycleFrame - (PHASE_1_DUR + PHASE_2_DUR)) / PHASE_3_DUR;
+                const offset = subProgress * 150;
+                const opacity = Math.min(1, subProgress * 2);
+
+                ctx.font = 'bold 32px Poppins';
+                ctx.textAlign = 'center';
+                
+                // Factor P
+                ctx.fillStyle = `rgba(255, 0, 85, ${opacity})`;
+                ctx.fillText(`p = ${P_VALUE}`, width/2 - offset, height/2 + 100);
+                
+                // Factor Q
+                ctx.fillStyle = `rgba(255, 0, 85, ${opacity})`;
+                ctx.fillText(`q = ${Q_VALUE}`, width/2 + offset, height/2 + 100);
+                
+                if (subProgress > 0.5) {
+                    ctx.fillStyle = '#ffffff';
+                    ctx.font = '20px Poppins';
+                    ctx.fillText("Facteurs premiers isolés !", width/2, height/2 + 140);
+                }
+            }
+            // PHASE 4: UNLOCK & DECRYPT
+            else {
+                updateStepUI(3);
+                statusLabel.innerText = "État: Déchiffrement Réussi";
+                
+                const subProgress = (currentCycleFrame - (PHASE_1_DUR + PHASE_2_DUR + PHASE_3_DUR)) / PHASE_4_DUR;
+                
+                // Lock turns red to indicate breach, then opens
+                const color = subProgress < 0.2 ? '#ff0055' : '#ff0055'; 
+                const isOpen = subProgress > 0.2;
+                
+                drawLock(width/2, height/2 - 20, 1.5, isOpen, color);
+                
+                if (isOpen) {
+                    ctx.fillStyle = '#00ff88'; // Green for success
+                    ctx.font = 'bold 40px Poppins';
+                    ctx.textAlign = 'center';
+                    ctx.shadowColor = '#00ff88';
+                    ctx.shadowBlur = 10;
+                    ctx.fillText(MESSAGE, width/2, height/2 + 110);
+                    ctx.shadowBlur = 0;
+                    
+                    ctx.fillStyle = '#ffffff';
+                    ctx.font = '16px Poppins';
+                    ctx.fillText("Message lu en clair", width/2, height/2 + 140);
+                }
+            }
+
+            frame++;
+            animationId = requestAnimationFrame(drawSimulation);
+        }
+
+        // Start Animation
+        drawSimulation();
+
+        // Restart Handler
+        document.getElementById('restartBtn').addEventListener('click', () => {
+            frame = 0;
+        });
+
+    </script>
+</body>
+</html>

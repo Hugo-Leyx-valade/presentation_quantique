@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>1905 - Einstein : Effet Photoélectrique</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #1a1025;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            width: 1910px;
+            height: 1070px;
+            overflow: hidden;
+        }
+
+        /* Glassmorphism Panels */
+        .glass-panel {
+            background: rgba(45, 27, 78, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+        }
+
+        .highlight-box {
+            background: rgba(255, 215, 0, 0.1);
+            border-left: 4px solid #ffd700;
+        }
+
+        /* Typography */
+        h1 {
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        /* SVG Styles */
+        .photon-beam {
+            stroke-dasharray: 5;
+            animation: dash 5s linear infinite;
+        }
+
+        @keyframes dash {
+            to {
+                stroke-dashoffset: -10;
+            }
+        }
+
+        .electron {
+            fill: #00f3ff;
+            filter: drop-shadow(0 0 4px rgba(0, 243, 255, 0.8));
+        }
+
+        .metal-surface {
+            fill: url(#metal-gradient);
+            stroke: #4a5568;
+            stroke-width: 2;
+        }
+
+        .photon {
+            fill: #ffd700;
+            filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.8));
+        }
+
+        /* Utility */
+        .glow-text {
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+    </style>
+</head>
+<body class="flex flex-col relative">
+<!-- Background Decor -->
+<div class="absolute top-0 right-0 w-full h-full overflow-hidden z-0 pointer-events-none">
+<div class="absolute -top-20 -left-20 w-96 h-96 bg-[#2d1b4e] rounded-full filter blur-3xl opacity-40"></div>
+<div class="absolute bottom-0 right-20 w-64 h-64 bg-[#ffd700] rounded-full filter blur-3xl opacity-5"></div>
+<!-- Abstract Particles -->
+<div class="absolute top-1/3 right-1/4 text-[#00f3ff] opacity-20 text-xs"><i class="fas fa-circle"></i></div>
+<div class="absolute bottom-1/4 left-10 text-[#00f3ff] opacity-20 text-xs"><i class="fas fa-circle"></i></div>
+</div>
+<!-- Main Container -->
+<div class="flex-1 flex flex-col p-12 relative z-10">
+<!-- Header -->
+<header class="flex items-center justify-between mb-8">
+<div>
+<div class="flex items-center space-x-3 mb-2">
+<span class="bg-[#2d1b4e] text-[#ffd700] px-3 py-1 rounded text-sm font-bold border border-[#ffd700] shadow-[0_0_10px_rgba(255,215,0,0.2)]">1905</span>
+<span class="text-gray-400 uppercase tracking-widest text-sm">Historique</span>
+</div>
+<h1 class="text-4xl font-bold text-white tracking-tight">Einstein et l'<span class="text-[#00f3ff]">effet photoélectrique</span></h1>
+</div>
+<div class="w-16 h-16 rounded-full bg-gradient-to-br from-gray-700 to-gray-900 border-2 border-gray-600 flex items-center justify-center overflow-hidden shadow-lg">
+<i class="fas fa-atom text-3xl text-gray-300"></i>
+</div>
+</header>
+<!-- Content Split -->
+<div class="flex-1 flex gap-12">
+<!-- Left Column: Text & Concept -->
+<div class="w-5/12 flex flex-col justify-center space-y-6">
+<!-- Context -->
+<div class="glass-panel p-6">
+<h3 class="text-white font-bold text-lg mb-2 flex items-center">
+<i class="fas fa-question-circle mr-2 text-gray-400"></i> Le Mystère
+                    </h3>
+<p class="text-gray-300 text-sm leading-relaxed">
+                        Pourquoi une lumière rouge très intense ne peut-elle pas arracher d'électrons à un métal, alors qu'une faible lumière bleue y parvient instantanément ?
+                    </p>
+</div>
+<!-- The Discovery -->
+<div class="highlight-box p-6 rounded-r-xl bg-opacity-10 backdrop-filter backdrop-blur-sm">
+<h3 class="text-[#ffd700] font-bold text-xl mb-3 flex items-center">
+<i class="fas fa-lightbulb mr-2"></i> La lumière est particule
+                    </h3>
+<p class="text-gray-200 text-sm mb-4 leading-relaxed">
+                        Einstein propose que la lumière est composée de grains d'énergie appelés <strong class="text-white glow-text">PHOTONS</strong>. C'est la preuve expérimentale de la théorie de Planck.
+                    </p>
+<div class="flex items-center space-x-3 bg-[#1a1025] p-3 rounded-lg border border-gray-700">
+<div class="flex-shrink-0 w-10 h-10 bg-[#ffd700] rounded-full flex items-center justify-center text-[#1a1025]">
+<i class="fas fa-trophy"></i>
+</div>
+<div>
+<p class="text-xs text-gray-400 uppercase font-bold">Prix Nobel 1921</p>
+<p class="text-sm text-white font-semibold">Décerné pour cette découverte, pas pour la relativité !</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Visual Illustration -->
+<div class="w-7/12 relative glass-panel p-8 flex flex-col">
+<h3 class="text-center text-gray-300 text-sm font-semibold uppercase tracking-widest mb-4">Mécanisme de l'effet photoélectrique</h3>
+<div class="flex-1 relative w-full h-full flex items-center justify-center">
+<!-- SVG Diagram -->
+<svg class="w-full h-full overflow-visible" viewbox="0 0 500 300">
+<defs>
+<lineargradient id="metal-gradient" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" style="stop-color:#4a5568;stop-opacity:1"></stop>
+<stop offset="100%" style="stop-color:#2d3748;stop-opacity:1"></stop>
+</lineargradient>
+<filter height="200%" id="glow" width="200%" x="-50%" y="-50%">
+<fegaussianblur result="coloredBlur" stddeviation="2.5"></fegaussianblur>
+<femerge>
+<femergenode in="coloredBlur"></femergenode>
+<femergenode in="SourceGraphic"></femergenode>
+</femerge>
+</filter>
+</defs>
+<!-- Metal Block -->
+<rect class="metal-surface" height="80" rx="4" width="400" x="50" y="200"></rect>
+<text fill="#a0aec0" font-family="Poppins" font-size="14" font-weight="bold" text-anchor="middle" x="250" y="270">PLAQUE MÉTALLIQUE</text>
+<!-- Scenario 1: Red Light (Low Energy) -->
+<g transform="translate(100, 0)">
+
+    <!-- Photon rouge -->
+    <path class="photon-beam"
+          d="M 30,0 Q 10,50 30,100 T 30,200"
+          fill="none"
+          stroke="#ff0055"
+          stroke-width="3">
+    </path>
+
+    <text fill="#ff0055" font-size="12" text-anchor="middle" x="30" y="-15">
+        Rouge (Faible freq.)
+    </text>
+
+    <!-- PHOTON -->
+    <circle cx="30" cy="0" fill="#ff0055" r="5">
+
+        <animate attributeName="cy"
+                 values="0; 200; 200"
+                 keyTimes="0; 0.66; 1"
+                 dur="6s"
+                 repeatCount="indefinite" />
+
+        <animate attributeName="opacity"
+                 values="1; 1; 0"
+                 keyTimes="0; 0.66; 1"
+                 dur="6s"
+                 repeatCount="indefinite" />
+    </circle>
+
+    <!-- FLASH ROUGE (impact sans éjection) -->
+    <circle cx="30" cy="200" r="0"
+            fill="#ff0055"
+            opacity="0">
+
+        <animate attributeName="r"
+                 values="0; 15; 0"
+                 keyTimes="0; 0.66; 0.75"
+                 dur="6s"
+                 repeatCount="indefinite" />
+
+        <animate attributeName="opacity"
+                 values="0; 0.6; 0"
+                 keyTimes="0; 0.66; 0.75"
+                 dur="6s"
+                 repeatCount="indefinite" />
+    </circle>
+
+    <!-- Electron reste en place -->
+    <circle class="electron"
+            cx="30"
+            cy="210"
+            opacity="0.5"
+            r="4" />
+
+    <text fill="#ff0055"
+          font-size="10"
+          text-anchor="middle"
+          x="30"
+          y="235">
+        Pas d'éjection
+    </text>
+
+</g>
+<!-- Scenario 2: Blue Light (High Energy) -->
+<g transform="translate(300, 0)">
+
+    <!-- Photon beam -->
+    <path class="photon-beam"
+          d="M 30,0 Q 50,20 30,40 T 30,80 T 30,120 T 30,160 T 30,200"
+          fill="none"
+          stroke="#00f3ff"
+          stroke-width="3">
+    </path>
+
+    <text fill="#00f3ff" font-size="12" text-anchor="middle" x="30" y="-15">
+        Bleu/UV (Haute freq.)
+    </text>
+
+    <!-- PHOTON (durée 6s dont 2s pause) -->
+    <circle cx="30" cy="0" fill="#00f3ff" filter="url(#glow)" r="5">
+
+        <animate attributeName="cy"
+                 values="0; 200; 200"
+                 keyTimes="0; 0.66; 1"
+                 dur="6s"
+                 repeatCount="indefinite" />
+
+        <animate attributeName="opacity"
+                 values="1; 1; 0"
+                 keyTimes="0; 0.66; 1"
+                 dur="6s"
+                 repeatCount="indefinite" />
+
+    </circle>
+    <!-- FLASH BLEU -->
+<circle cx="30" cy="200" r="0"
+        fill="#00f3ff"
+        opacity="0">
+
+    <animate attributeName="r"
+             values="0; 20; 0"
+             keyTimes="0; 0.66; 0.75"
+             dur="6s"
+             repeatCount="indefinite" />
+
+    <animate attributeName="opacity"
+             values="0; 1; 0"
+             keyTimes="0; 0.66; 0.75"
+             dur="6s"
+             repeatCount="indefinite" />
+</circle>
+
+    <!-- ELECTRON -->
+    <g>
+
+        <circle class="electron"
+                cx="30"
+                cy="210"
+                filter="url(#glow)"
+                r="6"
+                opacity="0">
+
+            <!-- Apparition synchronisée à l'impact -->
+            <animate attributeName="opacity"
+                     values="0; 0; 1; 1; 0"
+                     keyTimes="0; 0.65; 0.75; 0.85; 1"
+                     dur="6s"
+                     repeatCount="indefinite" />
+
+            <!-- Mouvement vertical -->
+            <animate attributeName="cy"
+                     values="210; 210; 210; 100; 100"
+                     keyTimes="0; 0.65; 0.75; 0.85; 1"
+                     dur="6s"
+                     repeatCount="indefinite" />
+
+            <!-- Mouvement horizontal -->
+            <animate attributeName="cx"
+                     values="30; 30; 30; 80; 80"
+                     keyTimes="0; 0.65; 0.75; 0.85; 1"
+                     dur="6s"
+                     repeatCount="indefinite" />
+
+        </circle>
+
+        <!-- Trajectoire -->
+        <path d="M 30,210 Q 50,150 80,100"
+              fill="none"
+              stroke="#ffff00"
+              stroke-width="2"
+              stroke-dasharray="4"
+              opacity="0">
+
+            <animate attributeName="opacity"
+                     values="0; 0; 1; 1; 0"
+                     keyTimes="0; 0.65; 0.75; 0.85; 1"
+                     dur="6s"
+                     repeatCount="indefinite" />
+        </path>
+
+        <text fill="#ffff00"
+              font-size="12"
+              font-weight="bold"
+              x="90"
+              y="90"
+              opacity="0">
+            e-
+            <animate attributeName="opacity"
+                     values="0; 0; 1; 1; 0"
+                     keyTimes="0; 0.65; 0.75; 0.85; 1"
+                     dur="6s"
+                     repeatCount="indefinite" />
+        </text>
+
+    </g>
+
+</g>
+<!-- Legend inside diagram -->
+<g transform="translate(160, 100)">
+<text fill="#a0aec0" font-size="10" text-anchor="middle" x="180" y="110">Seulement si</text>
+<text fill="#ffd700" font-size="12" font-weight="bold" text-anchor="middle" x="180" y="123">E = hν &gt; W</text>
+</g>
+</svg>
+</div>
+<div class="mt-2 text-center">
+<p class="text-xs text-gray-400 italic bg-[#1a1025] inline-block px-4 py-2 rounded-full border border-gray-700">
+                        1 Photon = 1 Électron (si l'énergie est suffisante)
+                    </p>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<div class="absolute bottom-6 left-12 right-12 flex justify-between items-center border-t border-gray-800 pt-3 text-xs text-gray-500">
+<div class="flex items-center space-x-2">
+<i class="fas fa-bolt text-[#ffd700]"></i>
+<p class="m-0">Fondement des panneaux solaires modernes</p>
+</div>
+<p class="m-0">5 / 34</p>
+</div>
+</div>
+</body>
+</html>

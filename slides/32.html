@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Course contre la montre — Où en est-on ?</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #1a1025;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            width: 1910px;
+            height: 1070px;
+            overflow: hidden;
+        }
+
+        /* Glassmorphism Panels */
+        .glass-panel {
+            background: rgba(45, 27, 78, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+        }
+
+        /* Timeline Styles */
+        .timeline-track {
+            position: absolute;
+            top: 50%;
+            left: 50px;
+            right: 50px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-50%);
+            z-index: 1;
+        }
+
+        .timeline-progress {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 85%; /* Progress indicating current state */
+            background: #00f3ff;
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.5);
+        }
+
+        .timeline-node {
+            position: absolute;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-node:hover {
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        .node-circle {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #1a1025;
+            border: 4px solid #00f3ff;
+            box-shadow: 0 0 0 4px rgba(0, 243, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-node.active .node-circle {
+            background: #00f3ff;
+            box-shadow: 0 0 0 8px rgba(0, 243, 255, 0.3);
+        }
+
+        .timeline-content-card {
+            position: absolute;
+            width: 300px;
+            transition: all 0.4s ease;
+        }
+
+        /* Top cards go up */
+        .card-top {
+            bottom: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Bottom cards go down */
+        .card-bottom {
+            top: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        /* Connector lines */
+        .connector {
+            position: absolute;
+            width: 2px;
+            background: rgba(0, 243, 255, 0.5);
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 5;
+        }
+        
+
+        /* Specific node colors */
+        .node-nist .node-circle { border-color: #00f3ff; }
+        .node-industry .node-circle { border-color: #ff0055; }
+        .node-best-practices .node-circle { border-color: #ffd700; }
+
+        .node-nist.active .node-circle { background: #00f3ff; }
+        .node-industry.active .node-circle { background: #ff0055; }
+        .node-best-practices.active .node-circle { background: #ffd700; }
+
+    </style>
+</head>
+<body class="flex flex-col relative">
+<!-- Background Decor -->
+<div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+<!-- Grid pattern overlay -->
+<div class="absolute inset-0 opacity-10" style="background-image: url('data:image/svg+xml,%3Csvg width=\'50\' height=\'50\' viewBox=\'0 0 50 50\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'1\' fill-rule=\'evenodd\'%3E%3Ccircle cx=\'2\' cy=\'2\' r=\'1\'/%3E%3C/g%3E%3C/svg%3E');">
+</div>
+<!-- Blurred color blobs -->
+<div class="absolute top-20 left-20 w-64 h-64 bg-[#00f3ff] rounded-full filter blur-[100px] opacity-10"></div>
+<div class="absolute bottom-20 right-20 w-80 h-80 bg-[#ff0055] rounded-full filter blur-[120px] opacity-10"></div>
+</div>
+<!-- Main Container -->
+<div class="flex-1 flex flex-col p-12 relative z-10 h-full">
+<!-- Header -->
+<header class="flex flex-col mb-8 text-center relative z-20">
+<div class="inline-block mx-auto mb-2">
+<span class="bg-[#2d1b4e] text-[#00f3ff] px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest border border-[#00f3ff] shadow-[0_0_15px_rgba(0,243,255,0.2)]">
+                    Transition Crypto
+                </span>
+</div>
+<h1 class="text-4xl font-bold text-white tracking-tight mb-2">
+                Course contre la montre : <span class="text-[#ffd700]">Où en est-on ?</span>
+</h1>
+<p class="text-gray-400 text-lg max-w-3xl mx-auto">
+                La migration vers la cryptographie post-quantique n'est plus une théorie, c'est un plan d'action immédiat.
+            </p>
+</header>
+<!-- Timeline Area -->
+<div class="flex-1 relative mt-8 mb-8">
+<!-- The Track -->
+<div class="timeline-track rounded-full">
+<!-- Progress bar -->
+<div class="timeline-progress rounded-full" style="width: 100%; background: #2d1b4e; border: 1px solid rgba(255,255,255,0.1);"></div>
+<div class="absolute top-0 left-0 h-full bg-[#00f3ff] opacity-20 w-full rounded-full"></div>
+</div>
+<!-- Node 1: NIST PQC (Left) -->
+<div class="timeline-node node-nist active" style="left: 20%;">
+<div class="node-circle"></div>
+<!-- Card (Top) -->
+<div class="timeline-content-card card-top">
+<div class="glass-panel p-5 border-l-4 border-[#00f3ff] transform transition hover:-translate-y-2 hover:shadow-[0_0_20px_rgba(0,243,255,0.2)]">
+<div class="flex justify-between items-start mb-2">
+<span class="text-xl font-bold text-[#00f3ff] opacity-80">En Cours</span>
+<div class="w-8 h-8 rounded-full bg-[#00f3ff] bg-opacity-20 flex items-center justify-center text-[#00f3ff]">
+<i class="fas fa-file-signature text-xs"></i>
+</div>
+</div>
+<h3 class="text-white font-bold text-lg leading-tight mb-2">Standardisation NIST</h3>
+<p class="text-gray-300 text-xs leading-relaxed">
+                            Le NIST a sélectionné les premiers algorithmes standards (Kyber, Dilithium). La normalisation est engagée pour remplacer RSA et ECC.
+                        </p>
+</div>
+</div>
+<div class="absolute top-8 left-1/2 transform -translate-x-1/2 text-[#00f3ff] font-bold text-sm mt-4">Normalisation</div>
+</div>
+<!-- Node 2: Industry Roadmap (Center) -->
+<div class="timeline-node node-industry active" style="left: 50%;">
+<div class="node-circle"></div>
+<!-- Card (Bottom) -->
+<div class="timeline-content-card card-bottom">
+<div class="glass-panel p-5 border-l-4 border-[#ff0055] transform transition hover:translate-y-2 hover:shadow-[0_0_20px_rgba(255,0,85,0.2)]">
+<div class="flex justify-between items-start mb-2">
+<span class="text-xl font-bold text-[#ff0055] opacity-80">3-5 Ans</span>
+<div class="w-8 h-8 rounded-full bg-[#ff0055] bg-opacity-20 flex items-center justify-center text-[#ff0055]">
+<i class="fas fa-industry text-xs"></i>
+</div>
+</div>
+<h3 class="text-white font-bold text-lg leading-tight mb-2">Feuilles de Route</h3>
+<p class="text-gray-300 text-xs leading-relaxed">
+                            Les industriels planifient la migration. Mises à jour matérielles et logicielles pour intégrer la PQC dans les navigateurs, cloud et IoT.
+                        </p>
+</div>
+</div>
+<div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-[#ff0055] font-bold text-sm mb-4">Migration Industrielle</div>
+</div>
+<!-- Node 3: Best Practices (Right) -->
+<div class="timeline-node node-best-practices active" style="left: 80%;">
+<div class="node-circle"></div>
+<!-- Card (Top) -->
+<div class="timeline-content-card card-top">
+<div class="glass-panel p-5 border-l-4 border-[#ffd700] transform transition hover:-translate-y-2 hover:shadow-[0_0_20px_rgba(255,215,0,0.2)]">
+<div class="flex justify-between items-start mb-2">
+<span class="text-xl font-bold text-[#ffd700] opacity-80">Immédiat</span>
+<div class="w-8 h-8 rounded-full bg-[#ffd700] bg-opacity-20 flex items-center justify-center text-[#ffd700]">
+<i class="fas fa-tasks text-xs"></i>
+</div>
+</div>
+<h3 class="text-white font-bold text-lg leading-tight mb-2">Bonnes Pratiques</h3>
+<p class="text-gray-300 text-xs leading-relaxed">
+                            1. Inventaire crypto (savoir ce qu'on utilise).<br/>
+                            2. Agilité cryptographique (pouvoir changer d'algo).<br/>
+                            3. Lancer des tests pilotes PQC.
+                        </p>
+</div>
+</div>
+<div class="absolute top-8 left-1/2 transform -translate-x-1/2 text-[#ffd700] font-bold text-sm mt-4">Action &amp; Préparation</div>
+</div>
+</div>
+<!-- Footer / Legend -->
+<div class="flex justify-center items-center space-x-12 mt-2 text-xs text-gray-400 border-t border-gray-800 pt-6">
+<div class="flex items-center">
+<div class="w-3 h-3 rounded-full bg-[#00f3ff] mr-2"></div>
+<p class="m-0">Cadre Légal &amp; Standards</p>
+</div>
+<div class="flex items-center">
+<div class="w-3 h-3 rounded-full bg-[#ff0055] mr-2"></div>
+<p class="m-0">Déploiement Technique</p>
+</div>
+<div class="flex items-center">
+<div class="w-3 h-3 rounded-full bg-[#ffd700] mr-2"></div>
+<p class="m-0">Stratégie d'Entreprise</p>
+</div>
+</div>
+<!-- Slide Number -->
+<div class="absolute bottom-6 right-12 text-xs text-gray-600">
+<p class="m-0">32 / 34</p>
+</div>
+</div>
+</body>
+</html>

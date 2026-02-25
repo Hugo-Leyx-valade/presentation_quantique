@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Applications — Optimisation &amp; Logistique</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #1a1025;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            width: 1910px;
+            height: 1070px;
+            overflow: hidden;
+        }
+        
+
+        .float-animation {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .glass-panel {
+            background: rgba(167, 120, 255, 0.484);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+        }
+        .glass-panel2 {
+            background: rgba(100, 67, 162, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+        }
+        .glass-panel3 {
+            background: rgba(45, 27, 78, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body class="flex flex-col">
+<!-- Slide Container -->
+<div class="flex-1 relative flex flex-col p-12">
+<!-- Background Elements -->
+<div class="absolute top-0 right-0 w-96 h-96 bg-[#2d1b4e] rounded-full filter blur-3xl opacity-30 transform translate-x-1/2 -translate-y-1/2"></div>
+<div class="absolute bottom-0 left-0 w-64 h-64 bg-[#ffd700] rounded-full filter blur-3xl opacity-10 transform -translate-x-1/3 translate-y-1/3"></div>
+<!-- Header Section -->
+<header class="mb-8 z-10 relative">
+<div class="inline-block px-4 py-1 rounded-full bg-[#00f3ff] bg-opacity-20 border border-[#00f3ff] mb-4">
+<p class="text-[#00f3ff] text-xs font-bold uppercase tracking-wider m-0">Informatique Quantique</p>
+</div>
+<h1 class="text-5xl font-bold text-white leading-tight m-0">
+                Applications : <span class="text-[#ffd700]">Optimisation &amp; Logistique</span>
+</h1>
+<div class="w-24 h-1 bg-[#ff0055] mt-6 rounded-full"></div>
+</header>
+<!-- Main Content Grid -->
+<div class="flex-1 grid grid-cols-12 gap-10 z-10">
+<!-- Left Column: Context -->
+<div class="col-span-5 flex flex-col justify-center">
+<div class="glass-panel3 p-8 rounded-2xl border-l-4 border-[#ffd700]">
+<p class="text-2xl font-light leading-relaxed text-gray-100 mb-6">
+                        Les problèmes d'optimisation deviennent <strong class="text-[#ffd700]">exponentiellement</strong> complexes avec la taille des données.
+                    </p>
+<p class="text-lg text-gray-300">
+                        L'ordinateur quantique peut explorer une multitude de combinaisons simultanément, offrant des solutions là où les supercalculateurs classiques saturent.
+                    </p>
+</div>
+<!-- Value Proposition Visual -->
+<div class="mt-8 flex items-center justify-between glass-panel3 p-6 rounded-xl border border-[#00f3ff] border-opacity-30">
+<div class="text-center">
+<i class="fas fa-clock text-[#00f3ff] text-2xl mb-2"></i>
+<p class="text-xs text-gray-300 uppercase font-bold m-0">Temps Réduit</p>
+</div>
+<div class="text-center border-l border-r border-gray-600 px-6">
+<i class="fas fa-coins text-[#ffd700] text-2xl mb-2"></i>
+<p class="text-xs text-gray-300 uppercase font-bold m-0">Coûts Optimisés</p>
+</div>
+<div class="text-center">
+<i class="fas fa-chart-line text-[#ff0055] text-2xl mb-2"></i>
+<p class="text-xs text-gray-300 uppercase font-bold m-0">Qualité Accrue</p>
+</div>
+</div>
+</div>
+<!-- Right Column: Key Points Cards -->
+<div class="col-span-7 grid grid-cols-1 gap-4">
+<!-- Card 1: Delivery -->
+<div class="glass-panel p-5 rounded-xl flex items-center transform transition hover:scale-102 duration-300">
+<div class="w-14 h-14 rounded-full bg-[#2d1b4e] flex items-center justify-center mr-5 border border-[#00f3ff] text-[#00f3ff] text-xl shadow-[0_0_15px_rgba(0,243,255,0.3)]">
+<i class="fas fa-truck-fast"></i>
+</div>
+<div>
+<h3 class="text-lg font-bold text-white mb-1">Tournées de Livraison</h3>
+<p class="text-gray-300 text-sm m-0">Résolution ultra-rapide du "problème du voyageur de commerce" pour optimiser les trajets de flottes mondiales.</p>
+</div>
+</div>
+<!-- Card 2: Scheduling -->
+<div class="glass-panel2 p-5 rounded-xl flex items-center transform transition hover:scale-102 duration-300 float-animation" style="animation-delay: 1s;">
+<div class="w-14 h-14 rounded-full bg-[#2d1b4e] flex items-center justify-center mr-5 border border-[#ff0055] text-[#ff0055] text-xl shadow-[0_0_15px_rgba(255,0,85,0.3)]">
+<i class="fas fa-industry"></i>
+</div>
+<div>
+<h3 class="text-lg font-bold text-white mb-1">Ordonnancement Industriel</h3>
+<p class="text-gray-300 text-sm m-0">Planification complexe des chaînes de production, des équipes et des ressources machines en temps réel.</p>
+</div>
+</div>
+<!-- Card 3: Networks -->
+<div class="glass-panel3 p-5 rounded-xl flex items-center transform transition hover:scale-102 duration-300 float-animation" style="animation-delay: 2s;">
+<div class="w-14 h-14 rounded-full bg-[#2d1b4e] flex items-center justify-center mr-5 border border-[#ffd700] text-[#ffd700] text-xl shadow-[0_0_15px_rgba(255,215,0,0.3)]">
+<i class="fas fa-network-wired"></i>
+</div>
+<div>
+<h3 class="text-lg font-bold text-white mb-1">Gestion de Réseaux</h3>
+<p class="text-gray-300 text-sm m-0">Optimisation des flux de trafic urbain, de la distribution d'énergie (Smart Grids) et des télécommunications.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Decorative Icon Background -->
+<div class="absolute right-10 bottom-10 opacity-5 pointer-events-none z-0">
+<i class="fas fa-route text-9xl text-white"></i>
+</div>
+<!-- Footer -->
+<div class="absolute bottom-6 left-12 right-12 flex justify-between items-center text-xs text-gray-500 border-t border-gray-800 pt-4">
+<p class="m-0">La Physique Quantique pour Débutants</p>
+<p class="m-0">23 / 34</p>
+</div>
+</div>
+</body>
+</html>

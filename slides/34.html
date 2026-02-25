@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Questions et Discussion</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #1a1025;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            width: 1910px;
+            height: 1070px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Glassmorphism Panels */
+        .glass-panel {
+            background: rgba(45, 27, 78, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            border-radius: 16px;
+        }
+
+        /* Resource Card Styling */
+        .resource-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 4px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .resource-card:hover {
+            transform: translateX(10px);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .border-cyan { border-left-color: #00f3ff; }
+        .border-pink { border-left-color: #ff0055; }
+        .border-gold { border-left-color: #ffd700; }
+
+        /* Icon Glow Animation */
+        @keyframes float-pulse {
+            0% { transform: translateY(0px); text-shadow: 0 0 20px rgba(0, 243, 255, 0.5); }
+            50% { transform: translateY(-10px); text-shadow: 0 0 40px rgba(0, 243, 255, 0.8); }
+            100% { transform: translateY(0px); text-shadow: 0 0 20px rgba(0, 243, 255, 0.5); }
+        }
+
+        .main-icon {
+            animation: float-pulse 4s infinite ease-in-out;
+        }
+
+        /* Background Blob Styling (Solid color with blur, no gradient syntax) */
+        .bg-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.15;
+            z-index: 0;
+        }
+
+        .blob-1 { top: -50px; right: -50px; width: 400px; height: 400px; background-color: #00f3ff; }
+        .blob-2 { bottom: -50px; left: -50px; width: 300px; height: 300px; background-color: #ff0055; }
+
+        /* Suggestion Pill */
+        .suggestion-pill {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            padding: 8px 16px;
+            font-size: 12px;
+            color: #ccc;
+            transition: all 0.2s;
+            cursor: default;
+        }
+        .suggestion-pill:hover {
+            background: rgba(0, 243, 255, 0.1);
+            border-color: #00f3ff;
+            color: #fff;
+        }
+
+        /* Avatar styling */
+        .avatar-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #2d1b4e;
+            border: 2px solid #00f3ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #00f3ff;
+        }
+    </style>
+</head>
+<body class="bg-[#1a1025] relative">
+<!-- Background Elements -->
+<div class="bg-blob blob-1"></div>
+<div class="bg-blob blob-2"></div>
+<!-- Main Content Container -->
+<div class="flex-1 flex flex-col p-12 relative z-10 h-full">
+<!-- Header -->
+<header class="flex items-start justify-between mb-8">
+<div>
+<div class="flex items-center space-x-3 mb-2">
+<span class="bg-[#2d1b4e] text-[#00f3ff] px-3 py-1 rounded text-xs font-bold uppercase tracking-widest border border-[#00f3ff] shadow-sm">
+<i class="fas fa-comments mr-2"></i> Conclusion
+                    </span>
+<span class="text-gray-400 uppercase tracking-widest text-sm">Fin de la présentation</span>
+</div>
+<h1 class="text-4xl font-bold text-white tracking-tight">
+                    Questions &amp; <span class="text-[#00f3ff]">Discussion</span>
+</h1>
+</div>
+<!-- Thank you badge -->
+<div class="glass-panel px-6 py-3 flex items-center space-x-3">
+<div class="text-right">
+<p class="text-xs text-gray-400 uppercase font-bold">Merci de votre attention</p>
+<p class="text-sm font-bold text-white">Avez-vous des questions ?</p>
+</div>
+<div class="w-10 h-10 rounded-full bg-[#00f3ff] flex items-center justify-center text-[#1a1025] text-lg font-bold">
+<i class="fas fa-check"></i>
+</div>
+</div>
+</header>
+<!-- Content Grid -->
+<div class="flex-1 flex gap-10">
+<!-- Left Column: Main Visual & Prompt -->
+<div class="w-5/12 flex flex-col justify-center items-center text-center">
+<!-- Big Icon -->
+<div class="text-[120px] text-[#00f3ff] main-icon mb-8 opacity-90">
+<i class="fas fa-question-circle"></i>
+</div>
+<div class="mb-8">
+<h2 class="text-2xl font-bold text-white mb-2">Le monde quantique est étrange...</h2>
+<p class="text-gray-400 text-sm max-w-sm mx-auto">
+                        "Si vous croyez comprendre la mécanique quantique, c'est que vous ne la comprenez pas."
+                    </p>
+<p class="text-[#00f3ff] text-xs font-bold mt-1">— Richard Feynman</p>
+</div>
+<!-- Discussion Starters -->
+<div class="w-full">
+<p class="text-xs text-gray-500 uppercase tracking-widest mb-3">Sujets de discussion suggérés</p>
+<div class="flex flex-wrap justify-center gap-2">
+<span class="suggestion-pill">L'avenir de la sécurité RSA</span>
+<span class="suggestion-pill">Paradoxe du chat</span>
+<span class="suggestion-pill">Téléportation quantique</span>
+<span class="suggestion-pill">Multivers</span>
+</div>
+</div>
+</div>
+<!-- Right Column: Resources & Contact -->
+<div class="w-7/12 flex flex-col h-full relative z-10 justify-center">
+<!-- Resources Section -->
+<div class="glass-panel p-6 flex-1 mb-6">
+<h3 class="text-lg font-bold text-white mb-4 flex items-center">
+<i class="fas fa-book-reader text-[#ffd700] mr-2"></i> Pour aller plus loin
+                    </h3>
+<div class="flex flex-col space-y-3">
+<!-- Resource 1: Video -->
+<div class="resource-card border-cyan p-4 rounded flex items-start">
+<div class="w-10 h-10 rounded bg-gray-800 flex items-center justify-center text-[#ff0055] text-xl mr-4 flex-shrink-0">
+<i class="fab fa-youtube"></i>
+</div>
+<div>
+<h4 class="text-sm font-bold text-white">ScienceEtonnante (YouTube)</h4>
+<p class="text-xs text-gray-400 mt-1">
+                                    Vidéos de vulgarisation excellentes sur "La Mécanique Quantique en 7 vidéos".
+                                </p>
+</div>
+</div>
+<!-- Resource 2: Book -->
+<div class="resource-card border-gold p-4 rounded flex items-start">
+<div class="w-10 h-10 rounded bg-gray-800 flex items-center justify-center text-[#ffd700] text-xl mr-4 flex-shrink-0">
+<i class="fas fa-book"></i>
+</div>
+<div>
+<h4 class="text-sm font-bold text-white">Livres recommandés</h4>
+<p class="text-xs text-gray-400 mt-1">
+                                    "Le Cantique des Quantiques" (S. Ortoli) ou "La physique quantique pour les nuls".
+                                </p>
+</div>
+</div>
+<!-- Resource 3: Interactive -->
+<div class="resource-card border-pink p-4 rounded flex items-start">
+<div class="w-10 h-10 rounded bg-gray-800 flex items-center justify-center text-[#00f3ff] text-xl mr-4 flex-shrink-0">
+<i class="fas fa-laptop-code"></i>
+</div>
+<div>
+<h4 class="text-sm font-bold text-white">IBM Quantum Experience</h4>
+<p class="text-xs text-gray-400 mt-1">
+                                    Programmez un véritable ordinateur quantique gratuitement depuis le cloud.
+                                </p>
+</div>
+</div>
+</div>
+</div>
+<!-- Contact/Social Section -->
+<div class="glass-panel p-5 flex items-center justify-between">
+<div>
+<p class="text-xs text-gray-400 uppercase tracking-widest mb-1">Présenté par</p>
+<p class="text-lg font-bold text-white">Hugo Leyx-valade / Hellowork (alternant JFS) / Efrei (2ème année d'ingénieur)</p>
+</div>
+<div class="flex space-x-3">
+<div class="w-10 h-10 rounded bg-[#1da1f2] flex items-center justify-center text-white hover:opacity-80 transition cursor-pointer">
+
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<div class="flex justify-between items-center text-xs text-gray-500 pt-6 mt-auto border-t border-gray-800">
+<p class="m-0 flex items-center">
+<i class="fas fa-atom mr-2 text-[#00f3ff]"></i> La fin n'est que le début de l'exploration.
+            </p>
+<p class="m-0">34 / 34</p>
+</div>
+</div>
+</body>
+</html>

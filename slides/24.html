@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Applications — Simulation Moléculaire</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #1a1025;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            width: 1910px;
+            height: 1070px;
+            overflow: hidden;
+        }
+
+        /* Glassmorphism Panels */
+        .glass-panel {
+            background: rgba(45, 27, 78, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+        }
+
+        .highlight-box {
+            background: rgba(0, 243, 255, 0.1);
+            border-left: 4px solid #00f3ff;
+        }
+
+        /* Typography */
+        h1 {
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        /* Utility */
+        .glow-text {
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+        }
+
+        .molecule-bond {
+            stroke: rgba(255, 255, 255, 0.3);
+            stroke-width: 2;
+        }
+
+        .atom-core {
+            fill: #2d1b4e; 
+            stroke: #00f3ff;
+            stroke-width: 2;
+        }
+        
+        .atom-core-highlight {
+            fill: #ff0055;
+            stroke: #ffbd00;
+        }
+
+        .electron-orbit {
+            fill: none;
+            stroke: rgba(255, 255, 255, 0.1);
+            stroke-dasharray: 4 4;
+        }
+
+        .bg-gradient-header {
+             background-color: #2d3748; /* Fallback */
+             /* No gradients allowed, using solid color with opacity handled by parent or svg */
+             background-color: rgba(55, 65, 81, 1);
+        }
+    </style>
+</head>
+<body class="flex flex-col relative">
+<!-- Background Decor -->
+<div class="absolute top-0 right-0 w-full h-full overflow-hidden z-0 pointer-events-none">
+<div class="absolute -top-20 -right-20 w-96 h-96 bg-[#2d1b4e] rounded-full filter blur-3xl opacity-40"></div>
+<div class="absolute bottom-0 left-20 w-64 h-64 bg-[#00f3ff] rounded-full filter blur-3xl opacity-5"></div>
+<div class="absolute top-1/4 left-10 text-[#ffd700] opacity-10 text-xl"><i class="fas fa-atom"></i></div>
+<div class="absolute bottom-1/3 right-10 text-[#ff0055] opacity-10 text-lg"><i class="fas fa-flask"></i></div>
+</div>
+<!-- Main Container -->
+<div class="flex-1 flex flex-col p-12 relative z-10">
+<!-- Header -->
+<header class="flex items-center justify-between mb-8">
+<div>
+<div class="flex items-center space-x-3 mb-2">
+<span class="bg-[#2d1b4e] text-[#00f3ff] px-3 py-1 rounded text-sm font-bold border border-[#00f3ff] shadow-[0_0_10px_rgba(0,243,255,0.2)]">APPLICATIONS</span>
+<span class="text-gray-400 uppercase tracking-widest text-sm">Informatique Quantique</span>
+</div>
+<h1 class="text-4xl font-bold text-white tracking-tight">Simulation <span class="text-[#ffd700]">Moléculaire</span></h1>
+</div>
+<div class="w-16 h-16 rounded-full bg-[#2d3748] border-2 border-gray-600 flex items-center justify-center overflow-hidden shadow-lg">
+<i class="fas fa-vial text-3xl text-[#00f3ff]"></i>
+</div>
+</header>
+<!-- Content Split -->
+<div class="flex-1 flex gap-12">
+<!-- Left Column: Text & Concept -->
+<div class="w-5/12 flex flex-col justify-center space-y-5">
+<!-- The Challenge -->
+<div class="glass-panel p-5">
+<h3 class="text-[#ff0055] font-bold text-lg mb-2 flex items-center">
+<i class="fas fa-lock mr-2"></i> Le Mur de la Complexité
+                    </h3>
+<p class="text-gray-300 text-sm leading-relaxed">
+                        Pour simuler une molécule, un ordinateur classique doit calculer les interactions de chaque électron avec tous les autres. La complexité explose exponentiellement avec la taille de la molécule.
+                    </p>
+</div>
+<!-- The Solution -->
+<div class="highlight-box p-5 rounded-r-xl bg-opacity-10 backdrop-filter backdrop-blur-sm">
+<h3 class="text-[#00f3ff] font-bold text-lg mb-3 flex items-center">
+<i class="fas fa-key mr-2"></i> L'Approche Quantique
+                    </h3>
+<p class="text-gray-200 text-sm mb-3 leading-relaxed">
+                        Richard Feynman l'a dit : "La nature est quantique". Les ordinateurs quantiques simulent naturellement ces états sans approximation.
+                    </p>
+<ul class="space-y-2 text-sm text-gray-300">
+<li class="flex items-center"><i class="fas fa-check-circle text-[#ffd700] mr-2 text-xs"></i> <span>Précision atomique inégalée</span></li>
+<li class="flex items-center"><i class="fas fa-check-circle text-[#ffd700] mr-2 text-xs"></i> <span>Découverte de nouveaux matériaux</span></li>
+</ul>
+</div>
+<!-- Impact Areas -->
+<div class="grid grid-cols-2 gap-3">
+<div class="bg-[#1a1025] border border-gray-700 rounded-lg p-3 flex items-center space-x-3">
+<div class="text-[#00f3ff] text-xl"><i class="fas fa-battery-full"></i></div>
+<div>
+<h4 class="text-white text-xs font-bold">Batteries</h4>
+<p class="text-[10px] text-gray-400">Meilleure densité</p>
+</div>
+</div>
+<div class="bg-[#1a1025] border border-gray-700 rounded-lg p-3 flex items-center space-x-3">
+<div class="text-[#ff0055] text-xl"><i class="fas fa-pills"></i></div>
+<div>
+<h4 class="text-white text-xs font-bold">Médicaments</h4>
+<p class="text-[10px] text-gray-400">Protéines complexes</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Visual Illustration -->
+<div class="w-7/12 relative glass-panel p-0 flex flex-col overflow-hidden">
+<div class="absolute top-4 left-4 z-20">
+<span class="bg-[#2d1b4e] text-xs text-white px-2 py-1 rounded border border-gray-600 opacity-80">Modélisation : Caféine (C₈H₁₀N₄O₂)</span>
+</div>
+<div class="flex-1 relative w-full h-full flex items-center justify-center bg-[#150d1f]">
+<!-- Molecule Visualization SVG -->
+<svg class="w-full h-full" viewbox="0 0 600 400">
+<!-- Background Grid -->
+<defs>
+<pattern height="40" id="smallGrid" patternunits="userSpaceOnUse" width="40">
+<path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"></path>
+</pattern>
+</defs>
+<rect fill="url(#smallGrid)" height="100%" width="100%"></rect>
+<!-- Simulation Waves (Quantum effect) -->
+<circle cx="300" cy="200" fill="none" r="100" stroke="#00f3ff" stroke-opacity="0.1" stroke-width="1"></circle>
+<circle cx="300" cy="200" fill="none" r="140" stroke="#00f3ff" stroke-opacity="0.05" stroke-width="1"></circle>
+<!-- Molecular Structure (Stylized Caffeine-like structure) -->
+<g transform="translate(300, 200) scale(1.2)">
+<!-- Bonds -->
+<!-- Ring 1 -->
+<line class="molecule-bond" x1="-40" x2="0" y1="-30" y2="-50"></line>
+<line class="molecule-bond" x1="0" x2="40" y1="-50" y2="-30"></line>
+<line class="molecule-bond" x1="40" x2="40" y1="-30" y2="20"></line>
+<line class="molecule-bond" x1="40" x2="0" y1="20" y2="40"></line>
+<line class="molecule-bond" x1="0" x2="-40" y1="40" y2="20"></line>
+<line class="molecule-bond" x1="-40" x2="-40" y1="20" y2="-30"></line>
+<!-- Ring 2 attached -->
+<line class="molecule-bond" x1="40" x2="70" y1="-30" y2="-10"></line>
+<line class="molecule-bond" x1="70" x2="70" y1="-10" y2="30"></line>
+<line class="molecule-bond" x1="70" x2="40" y1="30" y2="20"></line>
+<!-- Side groups -->
+<line class="molecule-bond" x1="-40" x2="-70" y1="-30" y2="-50"></line>
+<line class="molecule-bond" x1="0" x2="0" y1="-50" y2="-80"></line>
+<line class="molecule-bond" x1="-40" x2="-70" y1="20" y2="50"></line>
+<!-- Atoms -->
+<!-- Nitrogen (Blue) -->
+<circle class="atom-core" cx="-40" cy="-30" fill="#2d1b4e" r="8" stroke="#00f3ff"></circle>
+<circle class="atom-core" cx="40" cy="-30" fill="#2d1b4e" r="8" stroke="#00f3ff"></circle>
+<circle class="atom-core" cx="40" cy="20" fill="#2d1b4e" r="8" stroke="#00f3ff"></circle>
+<circle class="atom-core" cx="-40" cy="20" fill="#2d1b4e" r="8" stroke="#00f3ff"></circle>
+<!-- Carbon (Dark) -->
+<circle class="atom-core" cx="0" cy="-50" fill="#1a1025" r="7" stroke="#4a5568"></circle>
+<circle class="atom-core" cx="0" cy="40" fill="#1a1025" r="7" stroke="#4a5568"></circle>
+<circle class="atom-core" cx="70" cy="-10" fill="#1a1025" r="7" stroke="#4a5568"></circle>
+<circle class="atom-core" cx="70" cy="30" fill="#1a1025" r="7" stroke="#4a5568"></circle>
+<!-- Oxygen (Red/Highlight) -->
+<circle class="atom-core-highlight" cx="-70" cy="-50" r="8" stroke="none"></circle> <!-- Double bond approx -->
+<circle class="atom-core-highlight" cx="-70" cy="50" r="8" stroke="none"></circle>
+<!-- Methyl groups approx -->
+<circle class="atom-core" cx="0" cy="-80" fill="#2d1b4e" r="6" stroke="#a0aec0"></circle>
+<!-- Quantum "Active" Highlights -->
+<circle class="animate-pulse" cx="40" cy="-30" fill="#ffd700" opacity="0.4" r="12"></circle>
+<circle class="animate-pulse" cx="-40" cy="20" fill="#00f3ff" opacity="0.4" r="12" style="animation-delay: 0.5s"></circle>
+</g>
+<!-- Data Box Overlay -->
+<g transform="translate(420, 280)">
+<rect fill="rgba(26, 16, 37, 0.9)" height="90" rx="8" stroke="#00f3ff" stroke-width="1" width="160"></rect>
+<text fill="#ffffff" font-size="10" font-weight="bold" x="15" y="20">Complexité de Calcul</text>
+<!-- Mini Chart -->
+<line stroke="#555" stroke-width="1" x1="15" x2="145" y1="75" y2="75"></line> <!-- X axis -->
+<line stroke="#555" stroke-width="1" x1="15" x2="15" y1="75" y2="30"></line> <!-- Y axis -->
+<!-- Classical Curve (Exp) -->
+<path d="M 15 75 Q 80 70 140 35" fill="none" stroke="#ff0055" stroke-width="2"></path>
+<!-- Quantum Curve (Linear) -->
+<path d="M 15 75 L 140 70" fill="none" stroke="#00f3ff" stroke-width="2"></path>
+<text fill="#ff0055" font-size="8" x="80" y="45">Classique</text>
+<text fill="#00f3ff" font-size="8" x="80" y="65">Quantique</text>
+</g>
+</svg>
+</div>
+<div class="bg-[#2d1b4e] p-3 border-t border-gray-700 flex justify-between items-center">
+<p class="text-[10px] text-gray-400">
+<i class="fas fa-info-circle mr-1"></i> La simulation de la nitrogénase (fixation azote) nécessiterait des siècles en classique.
+                </p>
+<span class="text-[#00f3ff] text-xs font-bold">Gain : x10 000+</span>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<div class="absolute bottom-6 left-12 right-12 flex justify-between items-center border-t border-gray-800 pt-3 text-xs text-gray-500">
+<div class="flex items-center space-x-2">
+<i class="fas fa-tag"></i>
+<p class="m-0">Applications Concrètes</p>
+</div>
+<p class="m-0">24 / 34</p>
+</div>
+</div>
+</body>
+</html>

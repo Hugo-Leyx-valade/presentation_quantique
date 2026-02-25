@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light" style="" data-lt-installed="true"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>L'expérience des fentes de Young - Animation</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+<style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #1a1025;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            width: 1910px;
+            height: 1070px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Glassmorphism */
+        .glass-panel {
+            background: rgba(45, 27, 78, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+        }
+
+        /* Animation Containers */
+        #simulation-canvas {
+            width: 100%;
+            height: 100%;
+            border-radius: 12px;
+            background: radial-gradient(circle at center, #2d1b4e 0%, #1a1025 100%);
+        }
+
+        /* Step Indicators */
+        .step-item {
+            transition: all 0.7s ease;
+            opacity: 0.5;
+            border-left: 3px solid transparent;
+        }
+        
+        .step-item.active {
+            opacity: 1;
+            border-left: 3px solid #00f3ff;
+            background: rgba(0, 243, 255, 0.05);
+        }
+
+        .step-number {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            margin-right: 10px;
+        }
+
+        .step-item.active .step-number {
+            background: #00f3ff;
+            color: #1a1025;
+            font-weight: bold;
+        }
+
+        /* Interference Pattern Gradient on Screen */
+        .interference-gradient {
+            /* Fallback */
+            background: #1a1025; 
+        }
+
+        /* Play Button Pulse */
+        @keyframes pulse-ring {
+            0% { transform: scale(0.8); box-shadow: 0 0 0 0 rgba(0, 243, 255, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(0, 243, 255, 0); }
+            100% { transform: scale(0.8); box-shadow: 0 0 0 0 rgba(0, 243, 255, 0); }
+        }
+        
+        .btn-pulse {
+            animation: pulse-ring 6s infinite;
+        }
+
+    </style>
+</head>
+<lt-highlighter contenteditable="false" style="display: none; z-index: 1 !important;" data-lt-linked="1"><lt-div spellcheck="false" class="lt-highlighter__wrapper" style="overflow: hidden !important; width: 1280px !important; height: 720px !important; transform: none !important; transform-origin: 640px 360px !important; zoom: 1 !important;"><lt-div class="lt-highlighter__scroll-element" style="top: 0px !important; left: 0px !important; width: 1280px !important; height: 720px !important;"></lt-div></lt-div></lt-highlighter><body class="flex flex-col relative" style="" data-lt-tmp-id="lt-136000" spellcheck="false" data-gramm="false">
+<!-- Header -->
+<header class="flex items-center justify-between px-12 pt-8 pb-4 z-20">
+<div>
+<div class="flex items-center space-x-3 mb-2">
+<span class="bg-[#2d1b4e] text-[#00f3ff] px-3 py-1 rounded text-xs font-bold uppercase tracking-widest border border-[#00f3ff] shadow-[0_0_10px_rgba(0,243,255,0.2)]">
+                    Principe Fondamental
+                </span>
+</div>
+<h1 class="text-3xl font-bold text-white tracking-tight">
+                L'expérience des <span class="text-[#00f3ff]">Fentes de Young</span>
+</h1>
+</div>
+<!-- Legend/Key -->
+<div class="flex items-center space-x-6 text-xs text-gray-400 bg-[#2d1b4e] bg-opacity-50 px-4 py-2 rounded-full border border-gray-700">
+<div class="flex items-center">
+<span class="w-3 h-3 rounded-full bg-[#00f3ff] mr-2 shadow-[0_0_5px_#00f3ff]"></span>
+                Onde (Sommet)
+            </div>
+<div class="flex items-center">
+<span class="w-3 h-3 rounded-full bg-[#1a1025] border border-gray-600 mr-2"></span>
+                Creux
+            </div>
+<div class="flex items-center">
+<span class="w-3 h-3 rounded bg-gradient-to-r from-transparent via-[#00f3ff] to-transparent opacity-50 mr-2"></span>
+                Interférence
+            </div>
+</div>
+</header>
+<!-- Main Content -->
+<div class="flex-1 flex px-12 pb-10 gap-8">
+<!-- Left: Simulation View -->
+<div class="w-3/4 relative glass-panel p-1 overflow-hidden shadow-2xl flex flex-col">
+<!-- Canvas for Wave Simulation -->
+<canvas height="500" id="simulation-canvas" width="900" style="position: relative; transform: translate(1.022px, 6.3e-06px);"></canvas>
+<!-- Overlay Labels -->
+<div class="absolute top-4 left-4 bg-black bg-opacity-60 px-3 py-1 rounded text-xs text-gray-300 pointer-events-none">
+                Source
+            </div>
+<div class="absolute top-4 left-1/3 transform -translate-x-1/2 bg-black bg-opacity-60 px-3 py-1 rounded text-xs text-gray-300 pointer-events-none">
+                Double Fente
+            </div>
+<div class="absolute top-4 right-4 bg-black bg-opacity-60 px-3 py-1 rounded text-xs text-gray-300 pointer-events-none">
+                Écran de détection
+            </div>
+<!-- Play/Reset Controls Overlay -->
+<div class="absolute bottom-6 left-6 flex space-x-3 z-30">
+<button class="bg-[#2d1b4e] hover:bg-[#3d2b5e] text-white px-4 py-2 rounded-lg border border-gray-600 transition flex items-center shadow-lg" id="restartBtn">
+<i class="fas fa-redo-alt mr-2 text-[#00f3ff]"></i> Relancer
+                </button>
+</div>
+</div>
+<!-- Right: Explanation & Steps -->
+<div class="w-1/4 flex flex-col space-y-4 justify-center">
+<div class="step-item active p-4 rounded-lg">
+<div class="flex items-center mb-2">
+<div class="step-number">1</div>
+<h3 class="font-bold text-white text-sm">Émission</h3>
+</div>
+<p class="text-xs text-gray-400 leading-relaxed">
+                    Une source unique envoie des ondes lumineuses vers un obstacle.
+                </p>
+</div>
+<div class="step-item p-4 rounded-lg active">
+<div class="flex items-center mb-2">
+<div class="step-number">2</div>
+<h3 class="font-bold text-white text-sm">Diffraction</h3>
+</div>
+<p class="text-xs text-gray-400 leading-relaxed">
+                    En passant par les deux fentes, la lumière se divise en deux nouvelles sources d'ondes synchronisées.
+                </p>
+</div>
+<div class="step-item p-4 rounded-lg active">
+<div class="flex items-center mb-2">
+<div class="step-number">3</div>
+<h3 class="font-bold text-[#00f3ff] text-sm shadow-glow">Interférence</h3>
+</div>
+<p class="text-xs text-gray-300 leading-relaxed">
+                    Les deux ondes se croisent. 
+                    <br><span class="text-[#00f3ff]">• Sommet + Sommet = Renforcement (Lumière)</span>
+<br><span class="text-gray-500">• Sommet + Creux = Annulation (Noir)</span>
+</p>
+</div>
+<div class="glass-panel p-4 mt-auto border-t-4 border-[#ffd700]">
+<div class="flex items-start">
+<i class="fas fa-lightbulb text-[#ffd700] mt-1 mr-3"></i>
+<p class="text-xs text-gray-200 italic">
+                        Ce motif de rayures prouve que la lumière (et la matière !) se comporte comme une <strong>onde</strong>.
+                    </p>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<div class="absolute bottom-4 left-12 right-12 flex justify-between items-center text-xs text-gray-500 pt-2 border-t border-gray-800">
+<p class="m-0">Animation interactive : La dualité onde-particule</p>
+<p class="m-0">10 / 34</p>
+</div>
+<!-- Script for Canvas Animation -->
+<script>
+const canvas = document.getElementById('simulation-canvas');
+const ctx = canvas.getContext('2d');
+
+let width = canvas.width;
+let height = canvas.height;
+
+let animationId;
+
+// Configuration
+const waveSpeed = 120; // pixels par seconde
+const emissionInterval = 1000; // 1 seconde
+const wavelength = 20;
+
+const sourceX = 50;
+const slitX = 300;
+const screenX = 850;
+const slitGap = 100;
+
+// Gestion des ondes
+let waves = [];
+let lastEmission = 0;
+let lastTime = performance.now();
+
+// =========================
+// DRAW WAVE
+// =========================
+function drawWave(x, y, radius) {
+    ctx.beginPath();
+    ctx.arc(x, y, radius, 0, Math.PI * 2);
+
+    // Atténuation progressive
+    const alpha = Math.max(0, 1 - radius / 800);
+    ctx.strokeStyle = `rgba(0, 243, 255, ${alpha})`;
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+}
+
+// =========================
+// MAIN LOOP
+// =========================
+function drawInterference(now) {
+
+    const deltaTime = (now - lastTime) / 1000; // en secondes
+    lastTime = now;
+
+    ctx.clearRect(0, 0, width, height);
+
+    // =========================
+    // EMISSION (1 onde / seconde)
+    // =========================
+    if (now - lastEmission > emissionInterval) {
+        waves.push({ r: 0 });
+        lastEmission = now;
+    }
+
+    // =========================
+    // UPDATE WAVES
+    // =========================
+    for (let i = waves.length - 1; i >= 0; i--) {
+        waves[i].r += waveSpeed * deltaTime;
+
+        if (waves[i].r > width * 1.5) {
+            waves.splice(i, 1);
+        }
+    }
+
+    // =========================
+    // SOURCE PRINCIPALE (avant mur)
+    // =========================
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(0, 0, slitX, height);
+    ctx.clip();
+
+    waves.forEach(w => {
+        drawWave(sourceX, height / 2, w.r);
+    });
+
+    ctx.restore();
+
+    // =========================
+    // MUR AVEC FENTES
+    // =========================
+    ctx.fillStyle = '#a0aec0';
+    ctx.fillRect(slitX, 0, 4, height);
+
+    // trous
+    ctx.clearRect(slitX, height/2 - slitGap/2 - 10, 4, 20);
+    ctx.clearRect(slitX, height/2 + slitGap/2 - 10, 4, 20);
+
+    // =========================
+    // ONDES SECONDAIRES (après fentes)
+    // =========================
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(slitX, 0, width - slitX, height);
+    ctx.clip();
+
+    waves.forEach(w => {
+        drawWave(slitX, height/2 - slitGap/2, w.r);
+        drawWave(slitX, height/2 + slitGap/2, w.r);
+    });
+
+    ctx.restore();
+
+    // =========================
+    // ÉCRAN DE DÉTECTION
+    // =========================
+    ctx.fillStyle = '#000000';
+    ctx.fillRect(screenX, 20, 10, height - 40);
+
+    ctx.beginPath();
+    ctx.moveTo(screenX + 10, 20);
+
+    for (let y = 20; y < height - 20; y += 2) {
+
+        const d1 = Math.sqrt(
+            Math.pow(screenX - slitX, 2) +
+            Math.pow(y - (height/2 - slitGap/2), 2)
+        );
+
+        const d2 = Math.sqrt(
+            Math.pow(screenX - slitX, 2) +
+            Math.pow(y - (height/2 + slitGap/2), 2)
+        );
+
+        const phaseDiff = (d2 - d1) * (2 * Math.PI / wavelength);
+        const intensity = Math.pow(Math.cos(phaseDiff / 2), 2);
+        const mag = intensity * 40;
+
+        ctx.lineTo(screenX + 10 + mag, y);
+
+        ctx.fillStyle = `rgba(0, 243, 255, ${intensity})`;
+        ctx.fillRect(screenX, y, 10, 2);
+    }
+
+    ctx.strokeStyle = '#ffd700';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // =========================
+    // SOURCE VISUELLE
+    // =========================
+    ctx.fillStyle = '#ffffff';
+    ctx.beginPath();
+    ctx.arc(sourceX, height/2, 4, 0, Math.PI * 2);
+    ctx.fill();
+
+    animationId = requestAnimationFrame(drawInterference);
+}
+
+// =========================
+// START
+// =========================
+requestAnimationFrame(drawInterference);
+
+// =========================
+// RESTART
+// =========================
+document.getElementById('restartBtn').addEventListener('click', () => {
+    waves = [];
+    lastEmission = performance.now();
+});
+</script>
+
+</body></html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Le Chat de Schrödinger</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #1a1025;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            width: 1910px;
+            height: 1070px;
+            overflow: hidden;
+        }
+
+        /* Glassmorphism Panels */
+        .glass-panel {
+            background: rgba(45, 27, 78, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+        }
+
+        .highlight-box {
+            background: rgba(255, 215, 0, 0.1);
+            border-left: 4px solid #ffd700;
+        }
+
+        .warning-box {
+            background: rgba(255, 0, 85, 0.1);
+            border: 1px dashed #ff0055;
+            border-radius: 8px;
+        }
+
+        /* Typography */
+        h1 {
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        /* Animations */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { filter: drop-shadow(0 0 5px rgba(0, 243, 255, 0.5)); opacity: 0.8; }
+            50% { filter: drop-shadow(0 0 20px rgba(0, 243, 255, 0.8)); opacity: 1; }
+        }
+
+        @keyframes pulse-danger {
+            0%, 100% { filter: drop-shadow(0 0 5px rgba(255, 0, 85, 0.5)); opacity: 0.5; }
+            50% { filter: drop-shadow(0 0 15px rgba(255, 0, 85, 0.8)); opacity: 0.8; }
+        }
+
+        .cat-alive {
+            animation: float 3s ease-in-out infinite, pulse-glow 4s infinite;
+        }
+        
+        .cat-dead {
+            animation: float 4s ease-in-out infinite reverse, pulse-danger 4s infinite;
+        }
+
+        /* Math formula style */
+        .math-formula {
+            font-family: 'Times New Roman', serif;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body class="flex flex-col relative">
+<!-- Background Decor -->
+<div class="absolute top-0 right-0 w-full h-full overflow-hidden z-0 pointer-events-none">
+<div class="absolute -bottom-20 -left-20 w-96 h-96 bg-[#2d1b4e] rounded-full filter blur-3xl opacity-40"></div>
+<div class="absolute top-0 right-20 w-64 h-64 bg-[#ff0055] rounded-full filter blur-3xl opacity-5"></div>
+<div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-gradient-to-r from-[#00f3ff] to-[#ff0055] opacity-5 filter blur-[100px] rounded-full"></div>
+</div>
+<!-- Main Container -->
+<div class="flex-1 flex flex-col p-12 relative z-10">
+<!-- Header -->
+<header class="flex items-center justify-between mb-8">
+<div>
+<div class="flex items-center space-x-3 mb-2">
+<span class="bg-[#2d1b4e] text-[#ffd700] px-3 py-1 rounded text-sm font-bold border border-[#ffd700] shadow-[0_0_10px_rgba(255,215,0,0.2)]">Paradoxe</span>
+<span class="text-gray-400 uppercase tracking-widest text-sm">Superposition</span>
+</div>
+<h1 class="text-4xl font-bold text-white tracking-tight">Le Chat de <span class="text-[#00f3ff]">Schrödinger</span></h1>
+</div>
+<div class="w-16 h-16 rounded-full bg-gradient-to-br from-[#1a1025] to-[#2d1b4e] border-2 border-gray-600 flex items-center justify-center overflow-hidden shadow-lg">
+<i class="fas fa-cat text-3xl text-gray-300"></i>
+</div>
+</header>
+<!-- Content Split -->
+<div class="flex-1 flex gap-12">
+<!-- Left Column: Text & Concept -->
+<div class="w-5/12 flex flex-col justify-center space-y-6">
+<!-- The Setup -->
+<div class="glass-panel p-6">
+<h3 class="text-[#00f3ff] font-bold text-lg mb-3 flex items-center">
+<i class="fas fa-box-open mr-2"></i> Le Dispositif (Imaginaire)
+                    </h3>
+<ul class="space-y-3 text-gray-300 text-sm leading-relaxed">
+<li class="flex items-start">
+<i class="fas fa-radiation text-[#ff0055] mt-1 mr-2"></i>
+<p class="m-0">Un <strong>atome radioactif</strong> a 50% de chance de se désintégrer.</p>
+</li>
+<li class="flex items-start">
+<i class="fas fa-flask text-[#ffd700] mt-1 mr-2"></i>
+<p class="m-0">Si désintégration : un détecteur brise une fiole de poison.</p>
+</li>
+<li class="flex items-start">
+<i class="fas fa-cat text-gray-400 mt-1 mr-2"></i>
+<p class="m-0">Conséquence : le chat meurt (ou vit si rien ne se passe).</p>
+</li>
+</ul>
+</div>
+<!-- The Paradox -->
+<div class="highlight-box p-6 rounded-r-xl bg-opacity-10 backdrop-filter backdrop-blur-sm">
+<h3 class="text-[#ffd700] font-bold text-xl mb-2 flex items-center">
+<i class="fas fa-question-circle mr-2"></i> Avant d'ouvrir la boîte ?
+                    </h3>
+<p class="text-gray-200 text-sm mb-0 leading-relaxed">
+                        Selon la physique quantique, tant qu'on ne regarde pas, l'atome est <em>désintégré ET intact</em>. Par extension, le chat est <strong>MORT ET VIVANT</strong> simultanément.
+                    </p>
+</div>
+<!-- Disclaimer -->
+<div class="warning-box p-4 flex items-center space-x-3">
+<i class="fas fa-exclamation-triangle text-[#ff0055] text-xl"></i>
+<div>
+<p class="text-[#ff0055] font-bold text-xs uppercase mb-1">Attention : Analogie</p>
+<p class="text-gray-400 text-xs m-0">
+                            Ce n'est pas une expérience réelle ! C'est une expérience de pensée pour montrer l'absurdité de la superposition appliquée à notre échelle.
+                        </p>
+</div>
+</div>
+</div>
+<!-- Right Column: Visual Illustration -->
+<div class="w-7/12 relative glass-panel p-0 overflow-hidden flex flex-col items-center justify-center">
+<!-- Background grid -->
+<div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:40px_40px]"></div>
+<!-- Main Visualization SVG -->
+<svg class="w-full h-full" preserveaspectratio="xMidYMid meet" viewbox="0 0 600 400">
+<!-- The Box -->
+<rect fill="rgba(20, 20, 40, 0.6)" height="260" rx="20" stroke="#4a5568" stroke-width="2" width="400" x="100" y="80"></rect>
+<rect fill="none" height="240" rx="15" stroke="rgba(255,255,255,0.05)" stroke-dasharray="5,5" stroke-width="1" width="380" x="110" y="90"></rect>
+<!-- Radioactive Source -->
+<g transform="translate(150, 150)">
+<circle cx="0" cy="0" fill="#2d1b4e" r="20" stroke="#ff0055" stroke-width="2"></circle>
+<path d="M-10,-10 L10,10 M-10,10 L10,-10" stroke="#ff0055" stroke-width="2"></path>
+<text fill="#ff0055" font-family="Poppins" font-size="10" text-anchor="middle" x="0" y="35">Atome</text>
+</g>
+<!-- Connection Line -->
+<path d="M170,150 L220,150 L220,120 L250,120" fill="none" stroke="#4a5568" stroke-dasharray="4,4" stroke-width="2"></path>
+<!-- Poison Flask -->
+<g transform="translate(270, 110)">
+<path d="M0,0 L10,20 L-10,20 Z" fill="#ffd700" opacity="0.5"></path>
+<text fill="#ffd700" font-family="Poppins" font-size="10" text-anchor="middle" x="0" y="35">Poison</text>
+</g>
+<!-- Superposition Center -->
+<g transform="translate(350, 240)">
+<!-- Text Formula Background -->
+<rect fill="rgba(0,0,0,0.3)" height="140" rx="10" width="200" x="-100" y="-80"></rect>
+<!-- Cat Alive Representation (Blue Ghost) -->
+<g class="cat-alive" transform="translate(-40, -10)">
+<!-- FontAwesome Cat Icon using text -->
+<text fill="#00f3ff" font-family="Font Awesome 6 Free" font-size="60" font-weight="900" opacity="0.8" text-anchor="middle" x="0" y="0"></text>
+<text fill="#00f3ff" font-size="12" font-weight="bold" text-anchor="middle" x="0" y="30">| Vivant ⟩</text>
+</g>
+<!-- Cat Dead Representation (Red Ghost) -->
+<g class="cat-dead" transform="translate(40, -10)">
+<!-- FontAwesome Cat Icon (Skull for dead) -->
+<text fill="#ff0055" font-family="Font Awesome 6 Free" font-size="50" font-weight="900" opacity="0.8" text-anchor="middle" x="0" y="0"></text>
+<text fill="#ff0055" font-size="12" font-weight="bold" text-anchor="middle" x="0" y="30">| Mort ⟩</text>
+</g>
+<!-- Plus Sign -->
+<text fill="white" font-size="30" font-weight="bold" text-anchor="middle" x="0" y="-10">+</text>
+<!-- Box Label -->
+<text class="math-formula" fill="#a0aec0" font-size="14" font-style="italic" text-anchor="middle" x="0" y="80">|Ψ⟩ = 1/√2 (|Vivant⟩ + |Mort⟩)</text>
+</g>
+<!-- The Observer Eye (Outside) -->
+<g transform="translate(540, 210)">
+<text fill="#a0aec0" font-family="Font Awesome 6 Free" font-size="40" font-weight="900" text-anchor="middle" x="0" y="0"></text>
+<path d="M-30,0 L-50,0" marker-end="url(#arrow)" stroke="#a0aec0" stroke-dasharray="3,3" stroke-width="2"></path>
+<text fill="#a0aec0" font-size="10" text-anchor="middle" x="0" y="30">Observateur</text>
+</g>
+<defs>
+<marker id="arrow" markerheight="10" markerunits="strokeWidth" markerwidth="10" orient="auto" refx="9" refy="3">
+<path d="M0,0 L0,6 L9,3 z" fill="#a0aec0"></path>
+</marker>
+</defs>
+</svg>
+</div>
+</div>
+<!-- Footer -->
+<div class="absolute bottom-6 left-12 right-12 flex justify-between items-center border-t border-gray-800 pt-3 text-xs text-gray-500">
+<div class="flex items-center space-x-2">
+<i class="fas fa-atom"></i>
+<p class="m-0">Superposition quantique macroscopique</p>
+</div>
+<p class="m-0">14 / 34</p>
+</div>
+</div>
+</body>
+</html>
