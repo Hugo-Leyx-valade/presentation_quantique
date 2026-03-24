@@ -29,7 +29,25 @@ html,body{ height:100%; margin:0; font-family: system-ui, -apple-system, Segoe U
   height: 1070px;
   border: none;
   background: black;
-
-  /* 🔑 scale automatique */
   transform-origin: center center;
+  flex-shrink: 0;
+}
+
+/* Barre de progression */
+.progress-track{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: rgba(255,255,255,0.08);
+  z-index: 100;
+}
+
+.progress-bar{
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #00f3ff, #ff0055);
+  transition: width 0.3s ease;
+  box-shadow: 0 0 8px rgba(0,243,255,0.6);
 }
